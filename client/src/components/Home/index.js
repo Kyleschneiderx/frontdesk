@@ -41,8 +41,8 @@ class Home extends Component {
                 </h1>
                 <hr/>
                 <div className="App-container">
-                    <input type="text" name="search" placeholder="Search Patient"/>
-                    <div className='index-container'>
+                <input type="text" name="search" placeholder="Search Patient"/>
+                <div className='index-container'>
                     <TableContainer>
                         <Table>
                             <TableHead>
@@ -100,9 +100,9 @@ class Home extends Component {
                             </div>
                             <div className='title1'>
                                 Scheduled
-                            </div>
+                         </div>
                         </div> */}
-                    </div>
+                </div>   
                     {/* {this.state.patients.map((job, index) =>{
                         return(
                         <div key={index} className="in_app">
