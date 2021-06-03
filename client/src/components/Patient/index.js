@@ -24,10 +24,10 @@ function Patient({name, dob, phoneNumber, location, diagnosis, referralDate}){
                     {referralDate}
                 </div>
                 <div className='title'>
-                    <button>ADD</button>
+                    <button>Send</button>
                 </div>
                 <div className='title'>
-                    <button>Finish</button>
+                    <button>Scheduled</button>
                 </div>
                 {/* <div className="des">
                     <button className='btn-main'>

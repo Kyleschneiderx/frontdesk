@@ -7,10 +7,10 @@ const app = express();
 
 
 // const user = require('./routes/user')
-// const s = require('./routes/books')
+const patient = require('./routes/patient')
 
 /// password ZCOqzxy8BjG62AiP
-//username admin_user50
+// username admin_user50
 
 //mongodb+srv://admin_user50:<password>@cluster0-vjdh2.mongodb.net/<dbname>?retryWrites=true&w=majority
 
@@ -27,14 +27,17 @@ mongoose.connect(config.DATABASE,{
 
 
 // MIDDLEWARE
-
-app.use(bodyParser.json());
+app.use(express.json({
+    type: ['application/json', 'text/plain']
+  }));
+// app.use(express.urlencoded({
+//     extended: false
+// }))
 app.use(cookieParser());
 // app.use('/api/users', user);
-// app.use('/api/books', books);
+app.use('/api/patient', patient);
 
-app.use(express.static('client/build'))
-
+// app.use(express.static('client/build'))
 
 // if(procces.env.NODE_ENV === 'production'){
 //     const path = require('path')
@@ -49,5 +52,5 @@ app.use(express.static('client/build'))
 const port = process.env.PORT || 3001
 
 app.listen(port, () =>{
-    console.log('SERVER RUNNING')
+    console.log('SERVER RUNNING', port)
 })

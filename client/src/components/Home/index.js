@@ -1,25 +1,39 @@
 import React ,{Component} from 'react';
+import axios from 'axios';
 // import {connect} from 'react-redux';
 // import { getBooks } from '../../store/actions/book_actions';
 // import {RowGenerator, GenreateRowsWithBlocks} from '../../utils/helpers';
 import Patient from '../../components/Patient'
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 
-let jobs1 = [
-    {name: 'Cody Schneider', dob: '5/6/1994', phoneNumber: '(208)818-6441', location: 'Rathdrum', diagnosis: 'Knee', referralDate: '4/22/2021'},
-    {name: 'Kyle Schneider', dob: '4/24/1996', phoneNumber: '(208)818-3015', location: 'Post Falls', diagnosis: 'Back', referralDate: '4/22/2021'},
-    {name: 'Cole Schneider', dob: '6/4/1998', phoneNumber: '(208)277-8695', location: 'Hayden', diagnosis: 'Neck', referralDate: '4/22/2021'},
-    {name: 'Cole Schneider', dob: '6/4/1998', phoneNumber: '(208)277-8695', location: 'Hayden', diagnosis: 'inchjbjbjbjhbontinence', referralDate: '4/22/2021'}
-  ]
 
 
 class Home extends Component {
 
+    state = {
+        patients: []
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:3001/api/patient/')
+        .then((response) => response.data)
+        .then(patientsList => {
+            console.log(patientsList)
+            this.setState({ patients: patientsList });
+        });
+    }
+
+
 
     
     render(){
-        console.log(jobs1)
         return (
             <div>
                 <h1>
@@ -29,7 +43,40 @@ class Home extends Component {
                 <div className="App-container">
                     <input type="text" name="search" placeholder="Search Patient"/>
                     <div className='index-container'>
-                        <div className='list-container'>
+                    <TableContainer>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell>Diagnosis</TableCell>
+                                    <TableCell>Location</TableCell>
+                                    <TableCell>Phone Number</TableCell>
+                                    <TableCell>Called</TableCell>
+                                    <TableCell>Scheduled</TableCell>
+
+                                    
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {this.state.patients.map((item, index)=>(
+                                    <TableRow key={index}>
+                                        <TableCell>
+                                            {item.name}
+                                        </TableCell>
+                                        <TableCell>{item.diagnosis}</TableCell>
+                                        <TableCell>{item.location}</TableCell>
+                                        <TableCell>{item.phoneNumber}</TableCell>
+                                        <TableCell><button>Called</button></TableCell>
+                                        <TableCell><button>Called</button></TableCell>
+                                    </TableRow>
+                                ))
+
+                                }
+
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                        {/* <div className='list-container'>
                             <div className='title1'>
                                 Name
                             </div>
@@ -54,9 +101,9 @@ class Home extends Component {
                             <div className='title1'>
                                 Scheduled
                             </div>
-                        </div>
+                        </div> */}
                     </div>
-                    {jobs1.map((job, index) =>{
+                    {/* {this.state.patients.map((job, index) =>{
                         return(
                         <div key={index} className="in_app">
                         <Patient
@@ -69,7 +116,7 @@ class Home extends Component {
                             />
                         </div>
                         )
-                        })}
+                        })} */}
                 </div>
             </div>
           );

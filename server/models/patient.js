@@ -1,6 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// console.log(firstNameInput.value)
+// console.log(lastNameInput.value)
+// console.log(month.value)
+// console.log(day.value)
+// console.log(year.value)
+// console.log(areacode.value)
+// console.log(numberFirst.value)
+// console.log(numberSecond.value)
+// console.log(rd.value)
+// console.log(fac.value)
+
+
 
 
 const patientSchema = mongoose.Schema({
@@ -8,36 +20,22 @@ const patientSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    author:{
-        type: String,
-        required: true
-    },
-    content:{
+    dob:{
         type: String,
         required: 'n/a'
     },
-    pages:{
+    phoneNumber:{
         type: String,
-        default: 'n/a'
-
+        required: 'n/a'
     },
-    rating:{
-        type: Number,
-        required: true,
-        min:1,
-        max:5
-    },
-    price:{
+    referralDate:{
         type: String,
-        default: 'n/a'
+        required: 'n/a'
     },
-    ownerId:{
-        type: Schema.Types.ObjectId,
-        ref:'User',
-        required: true
-
+    location:{
+        type: String,
+        required: 'n/a'
     }
-
 
 },{timestamps:true})
 
