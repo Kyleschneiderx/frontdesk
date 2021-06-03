@@ -2,7 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const config = require('./config/config').get(process.env.NODE_ENV)
+const config = require('dotenv').config()
 const app = express();
 
 
@@ -15,9 +15,8 @@ const patient = require('./routes/patient')
 //mongodb+srv://admin_user50:<password>@cluster0-vjdh2.mongodb.net/<dbname>?retryWrites=true&w=majority
 
 
-console.log(config.DATABASE)
 
-mongoose.connect(config.DATABASE,{
+mongoose.connect(process.env.REACT_APP_MONGODB_URI,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
