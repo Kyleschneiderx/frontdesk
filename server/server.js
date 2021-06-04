@@ -2,7 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const config = require('dotenv').config()
+const config = require('./config/config').get(process.env.NODE_ENV)
 const app = express();
 
 
@@ -14,9 +14,10 @@ const patient = require('./routes/patient')
 
 //mongodb+srv://admin_user50:<password>@cluster0-vjdh2.mongodb.net/<dbname>?retryWrites=true&w=majority
 
+// console.log(config)
 
 
-mongoose.connect(process.env.REACT_APP_MONGODB_URI,{
+mongoose.connect(config.DATABASE,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -36,15 +37,15 @@ app.use(cookieParser());
 // app.use('/api/users', user);
 app.use('/api/patient', patient);
 
-// app.use(express.static('client/build'))
+app.use(express.static('client/build'))
 
-// if(procces.env.NODE_ENV === 'production'){
-//     const path = require('path')
-//     app.get('/*', (req, res)=>{
-//         console.log('Works');
-//         res.sendFile(path.resolve(__dirname,'../client', 'build', 'index.html'));
-//     })
-// }
+if(process.env.NODE_ENV === 'production'){
+    const path = require('path')
+    app.get('/*', (req, res)=>{
+        console.log('Works');
+        res.sendFile(path.resolve(__dirname,'../client', 'build', 'index.html'));
+    })
+}
 
 
 
