@@ -8,7 +8,7 @@ const config = {
         DATABASE: process.env.REACT_APP_MONGODB_URI
     },
     defualt: {
-        SECRET: process.env.REACT_APP_SECRET,
+        SECRET: process.env.SECRET,
         DATABASE: process.env.REACT_APP_MONGODB_URI
 
     }

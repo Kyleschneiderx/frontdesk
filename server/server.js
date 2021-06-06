@@ -15,6 +15,7 @@ const patient = require('./routes/patient')
 //mongodb+srv://admin_user50:<password>@cluster0-vjdh2.mongodb.net/<dbname>?retryWrites=true&w=majority
 
 // console.log(config)
+console.log(process.env.NODE_ENV)
 
 
 mongoose.connect(config.DATABASE,{
@@ -25,7 +26,7 @@ mongoose.connect(config.DATABASE,{
 });
 
 
-
+console.log(config)
 // MIDDLEWARE
 app.use(express.json({
     type: ['application/json', 'text/plain']
