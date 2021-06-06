@@ -15,7 +15,7 @@ const patient = require('./routes/patient')
 //mongodb+srv://admin_user50:<password>@cluster0-vjdh2.mongodb.net/<dbname>?retryWrites=true&w=majority
 
 // console.log(config)
-console.log(process.env.NODE_ENV)
+// console.log(process.env.NODE_ENV)
 
 
 mongoose.connect(config.DATABASE,{
@@ -38,13 +38,12 @@ app.use(cookieParser());
 // app.use('/api/users', user);
 app.use('/api/patient', patient);
 
-app.use(express.static('client/build'))
+app.use(express.static('client/build'));
 
 if(process.env.NODE_ENV === 'production'){
-    const path = require('path')
-    app.get('/*', (req, res)=>{
-        console.log('Works');
-        res.sendFile(path.resolve(__dirname,'../client', 'build', 'index.html'));
+    const path = require('path');
+    app.get('/*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'../client','build','index.html'))
     })
 }
 
