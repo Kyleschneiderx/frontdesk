@@ -9,6 +9,7 @@ import {
 
 /*=============USER=================*/
 export function loginUser({email, password}){
+    console.log(email, password)
     const request = axios.post('/api/users/login', {email, password})
     .then(response => response.data)
 
@@ -29,9 +30,9 @@ export function auth(){
 
 export function logoutUser(){
     const request = axios.get('/api/users/logout')
-                                .then(response => {
-                                    return null
-                                });
+        .then(response => {
+                return null
+            });
     return{
         type: USER_LOGOUT,
         payload:request

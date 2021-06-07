@@ -40,7 +40,7 @@ class Login extends Component {
 
     componentDidUpdate(){
         if(this.state.success){
-            this.props.history.push('/admin');
+            this.props.history.push('/home');
         }
     }
 
@@ -54,9 +54,10 @@ class Login extends Component {
                     <hr/>
                     <h4>Sign in here:</h4>
                     <Formik
-                        initialValues={{email:'', password: ''}}
+                        initialValues={{email:'kyle@transplanet.net', password: 'Brothers25'}}
                         validationSchema={LoginSchema}
                         onSubmit={values =>{
+                            console.log(values)
                             this.props.dispatch(loginUser(values)).then(response =>{
                                 if(!this.props.user.auth){
                                     this.setState({
