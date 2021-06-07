@@ -41,7 +41,10 @@ class Home extends Component {
                 </h1>
                 <hr/>
                 <div className="App-container">
-                <input type="text" name="search" placeholder="Search Patient"/>
+                <div className='index-container'>
+                    <input type="text" name="search" placeholder="Search Patient"/>
+                </div>
+
                 <div className='index-container'>
                     <TableContainer>
                         <Table>

@@ -48,85 +48,89 @@ class Login extends Component {
     render(){
         console.log(this.props)
         return(   
-            <div className="container form_container">
-                <h1> Welcome Back</h1>
-                <hr/>
-                <h4>Sign in here:</h4>
-                <Formik
-                    initialValues={{email:'kyle@something7.com', password: 'hello2424'}}
-                    validationSchema={LoginSchema}
-                    onSubmit={values =>{
-                        this.props.dispatch(loginUser(values)).then(response =>{
-                              if(!this.props.user.auth){
-                                this.setState({
-                                    validation:true
-                                })
-                            }
-                        })
+            <div className="App-container">
+                <div className="Login-container">
+                    <h1> Welcome Back</h1>
+                    <hr/>
+                    <h4>Sign in here:</h4>
+                    <Formik
+                        initialValues={{email:'', password: ''}}
+                        validationSchema={LoginSchema}
+                        onSubmit={values =>{
+                            this.props.dispatch(loginUser(values)).then(response =>{
+                                if(!this.props.user.auth){
+                                    this.setState({
+                                        validation:true
+                                    })
+                                }
+                            })
 
-                    }}  
-                >
-                    {({
-                        values,
-                        errors,
-                        touched,
-                        handleChange,
-                        handleBlur,
-                        handleSubmit
+                        }}  
+                    >
+                        {({
+                            values,
+                            errors,
+                            touched,
+                            handleChange,
+                            handleBlur,
+                            handleSubmit
 
-                    })=>(
-                        <form onSubmit={handleSubmit}>
+                        })=>(
+                            <form onSubmit={handleSubmit}>
 
-                            <div className="row">
-                                <div className='twelve columns'>
-                                    <input
-                                    type="email"
-                                    name="email"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email}
-                                    placeholder="Enter your Email"
-                                    className="u-full-width"
-                                    />
-                                    { errors.email && touched.email ? 
-                                        <div className="error_label">{errors.email}</div>
-                                    :null}
+                                <div className="row">
+                                    <div className='twelve columns'>
+                                        <input
+                                        type="email"
+                                        name="email"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.email}
+                                        placeholder="Enter your Email"
+                                        className="u-full-width"
+                                        />
+                                        { errors.email && touched.email ? 
+                                            <div className="error_label">{errors.email}</div>
+                                        :null}
+                                    </div>
+
+                                </div>
+                                <div className="row">
+                                    <div className='twelve columns'>
+                                        <input
+                                        type="password"
+                                        name="password"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.password}
+                                        placeholder="Enter your password"
+                                        className="u-full-width"
+                                        />
+                                        { errors.password && touched.password ? 
+                                            <div className="error_label">{errors.password}</div>
+                                        :null}
+                                    </div>
+
+                                </div>
+                                <div className="login-button-padding">
+                                    <button type="submit" className="Login-button button1">
+                                        Login
+                                    </button>
                                 </div>
 
-                            </div>
-                            <div className="row">
-                                <div className='twelve columns'>
-                                    <input
-                                    type="password"
-                                    name="password"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.password}
-                                    placeholder="Enter your password"
-                                    className="u-full-width"
-                                    />
-                                    { errors.password && touched.password ? 
-                                        <div className="error_label">{errors.password}</div>
-                                    :null}
-                                </div>
+                                <br/>
+                                {
+                                    this.state.validation ?
+                                    <div className='error_label'>
+                                        Error, Please try again
+                                    </div>
+                                :null
+                                }
 
-                            </div>
-
-                            <button type="submit">
-                                Login
-                            </button>
-                            <br/>
-                            {
-                                this.state.validation ?
-                                <div className='error_label'>
-                                    Error, Please try again
-                                </div>
-                            :null
-                            }
-
-                        </form>
-                    )}
-                </Formik>
+                            </form>
+                        )}
+                    </Formik>
+                </div>
             </div>
         )
     }
