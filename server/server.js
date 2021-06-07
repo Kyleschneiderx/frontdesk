@@ -6,7 +6,7 @@ const config = require('./config/config').get(process.env.NODE_ENV)
 const app = express();
 
 
-// const user = require('./routes/user')
+const user = require('./routes/user')
 const patient = require('./routes/patient')
 
 /// password ZCOqzxy8BjG62AiP
@@ -35,7 +35,7 @@ app.use(express.json({
 //     extended: false
 // }))
 app.use(cookieParser());
-// app.use('/api/users', user);
+app.use('/api/users', user);
 app.use('/api/patient', patient);
 
 app.use(express.static('client/build'));

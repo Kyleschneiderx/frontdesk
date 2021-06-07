@@ -35,6 +35,10 @@ const patientSchema = mongoose.Schema({
     location:{
         type: String,
         required: 'n/a'
+    },
+    diagnosis: {
+        type: String,
+        required: 'n/a'
     }
 
 },{timestamps:true})

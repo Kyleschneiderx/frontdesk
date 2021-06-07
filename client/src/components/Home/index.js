@@ -51,6 +51,7 @@ class Home extends Component {
                                     <TableCell>Diagnosis</TableCell>
                                     <TableCell>Location</TableCell>
                                     <TableCell>Phone Number</TableCell>
+                                    <TableCell>Referral Date</TableCell>
                                     <TableCell>Called</TableCell>
                                     <TableCell>Scheduled</TableCell>
 
@@ -66,6 +67,7 @@ class Home extends Component {
                                         <TableCell>{item.diagnosis}</TableCell>
                                         <TableCell>{item.location}</TableCell>
                                         <TableCell>{item.phoneNumber}</TableCell>
+                                        <TableCell>{item.referralDate}</TableCell>
                                         <TableCell><button>Called</button></TableCell>
                                         <TableCell><button>Called</button></TableCell>
                                     </TableRow>
