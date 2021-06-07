@@ -13,7 +13,7 @@ const Routes = () =>{
             <MainLayout>
                 <Switch>
                     <Route path='/home' component={Auth(Home)}/>
-                    <Route path='/login' component={Login}/>
+                    <Route path='/' component={Login}/>
                 </Switch>
             </MainLayout>
         </BrowserRouter>

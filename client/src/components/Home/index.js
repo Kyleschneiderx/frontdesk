@@ -4,6 +4,8 @@ import axios from 'axios';
 // import { getBooks } from '../../store/actions/book_actions';
 // import {RowGenerator, GenreateRowsWithBlocks} from '../../utils/helpers';
 import Patient from '../../components/Patient'
+import { getPatients } from '../../store/actions/patient_actions'
+import {connect} from 'react-redux';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -22,18 +24,20 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3001/api/patient/')
-        .then((response) => response.data)
-        .then(patientsList => {
-            console.log(patientsList)
-            this.setState({ patients: patientsList });
-        });
+
+        this.props.dispatch(getPatients())
+        // axios.get('http://localhost:3001/api/patient/')
+        // .then((response) => response.data)
+        // .then(patientsList => {
+        //     console.log(patientsList)
+        //     this.setState({ patients: patientsList });
+        // });
+        
     }
-
-
 
     
     render(){
+        console.log(this.props.patients.collection)
         return (
             <div>
                 <h1>
@@ -55,14 +59,14 @@ class Home extends Component {
                                     <TableCell>Location</TableCell>
                                     <TableCell>Phone Number</TableCell>
                                     <TableCell>Referral Date</TableCell>
-                                    <TableCell>Called</TableCell>
-                                    <TableCell>Scheduled</TableCell>
+                                    <TableCell>Call</TableCell>
+                                    <TableCell>Schedule</TableCell>
 
                                     
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {this.state.patients.map((item, index)=>(
+                                {this.props.patients.collection.map((item, index)=>(
                                     <TableRow key={index}>
                                         <TableCell>
                                             {item.name}
@@ -72,7 +76,7 @@ class Home extends Component {
                                         <TableCell>{item.phoneNumber}</TableCell>
                                         <TableCell>{item.referralDate}</TableCell>
                                         <TableCell><button>Called</button></TableCell>
-                                        <TableCell><button>Called</button></TableCell>
+                                        <TableCell><button>Scheduled</button></TableCell>
                                     </TableRow>
                                 ))
 
@@ -130,4 +134,10 @@ class Home extends Component {
 
 }
 
-export default Home;
+function mapStateToProps(state){
+    return {
+        patients: state.patients
+    }
+}
+
+export default connect(mapStateToProps)(Home);
