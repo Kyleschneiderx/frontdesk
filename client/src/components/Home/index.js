@@ -23,7 +23,8 @@ class Home extends Component {
         patients: []
     }
 
-    componentDidMount() {
+    componentDidMount(){
+        console.log("Get Patients")
 
         this.props.dispatch(getPatients())
         // axios.get('http://localhost:3001/api/patient/')
@@ -33,6 +34,28 @@ class Home extends Component {
         //     this.setState({ patients: patientsList });
         // });
         
+    }
+
+    showPatients =(patients) => {
+        if(patients.collection){
+            return(
+                patients.collection.map((item, index)=>(
+                    <TableRow key={index}>
+                        <TableCell>
+                            {item.name}
+                        </TableCell>
+                        <TableCell>{item.diagnosis}</TableCell>
+                        <TableCell>{item.location}</TableCell>
+                        <TableCell>{item.phoneNumber}</TableCell>
+                        <TableCell>{item.referralDate}</TableCell>
+                        <TableCell><button>Called</button></TableCell>
+                        <TableCell><button>Scheduled</button></TableCell>
+                    </TableRow>
+                ))
+            )
+
+        }
+        return false
     }
 
     
@@ -66,22 +89,7 @@ class Home extends Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {this.props.patients.collection.map((item, index)=>(
-                                    <TableRow key={index}>
-                                        <TableCell>
-                                            {item.name}
-                                        </TableCell>
-                                        <TableCell>{item.diagnosis}</TableCell>
-                                        <TableCell>{item.location}</TableCell>
-                                        <TableCell>{item.phoneNumber}</TableCell>
-                                        <TableCell>{item.referralDate}</TableCell>
-                                        <TableCell><button>Called</button></TableCell>
-                                        <TableCell><button>Scheduled</button></TableCell>
-                                    </TableRow>
-                                ))
-
-                                }
-
+                                {this.showPatients(this.props.patients)}
                             </TableBody>
                         </Table>
                     </TableContainer>

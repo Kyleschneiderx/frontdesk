@@ -26,7 +26,6 @@ mongoose.connect(config.DATABASE,{
 });
 
 
-console.log(config)
 // MIDDLEWARE
 app.use(express.json({
     type: ['application/json', 'text/plain']

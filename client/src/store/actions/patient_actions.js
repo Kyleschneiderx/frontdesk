@@ -61,9 +61,10 @@ import {
 // }
 
 export function getPatients(list){
+    console.log("in the action")
     const request = axios.get('api/patient/')
-    .then( response => {
-        return list ? [...list, ...response.data] : response.data 
+    .then( response =>{
+        return list ? [...list, ...response.data] : response.data
     });
 
     return{

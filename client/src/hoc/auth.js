@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {auth} from '../store/actions/user_actions';
 import {connect} from 'react-redux';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 
 export default function(ComposedClass, reload) {
@@ -17,11 +18,11 @@ export default function(ComposedClass, reload) {
                 this.setState({loading:false})
                 if(!user){
                     if(reload){
-                        this.props.history.push('/login');
+                        this.props.history.push('/');
                     }
                 } else {
                     if(reload === false){
-                        this.props.history.push('/admin')
+                        this.props.history.push('/home')
                     }
                     
                 }
@@ -31,7 +32,8 @@ export default function(ComposedClass, reload) {
 
         render(){
             if(this.state.loading){
-                return <div className= "loader">Loading...</div>
+                return <LinearProgress />
+                // <div className= "loader">Loading...</div>
             }else{
                 return <ComposedClass {...this.props} user={this.props.user}/>
             }
