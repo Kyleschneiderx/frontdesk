@@ -4,7 +4,8 @@ import axios from 'axios';
 // import { getBooks } from '../../store/actions/book_actions';
 // import {RowGenerator, GenreateRowsWithBlocks} from '../../utils/helpers';
 import Patient from '../../components/Patient'
-import { getPatients } from '../../store/actions/patient_actions'
+import { getPatients, deletePatient } from '../../store/actions/patient_actions'
+import { addSchedule } from '../../store/actions/scheduled_actions'
 import {connect} from 'react-redux';
 
 import Table from '@material-ui/core/Table';
@@ -13,6 +14,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import * as Twilio from 'twilio-client';
 
 
 
@@ -25,6 +27,7 @@ class Home extends Component {
 
     componentDidMount(){
         console.log("Get Patients")
+        
 
         this.props.dispatch(getPatients())
         // axios.get('http://localhost:3001/api/patient/')
@@ -35,6 +38,28 @@ class Home extends Component {
         // });
         
     }
+
+    // call=()=>{
+    //     axios.get('/api/calls/token').then(res =>{
+    //         console.log(res)
+    //         Twilio.Device.setup(res.data)
+    //     })
+
+              
+    // }
+
+    scheduledPateint=(key)=>{
+
+
+        alert('Confirm Person has been scheduled')
+        console.log(this.props.patients.collection[key])
+        this.props.dispatch(addSchedule(this.props.patients.collection[key]))
+        this.props.dispatch(deletePatient(this.props.patients.collection[key]))
+        this.props.dispatch(getPatients())
+
+
+    }
+
 
     showPatients =(patients) => {
         if(patients.collection){
@@ -49,7 +74,7 @@ class Home extends Component {
                         <TableCell>{item.phoneNumber}</TableCell>
                         <TableCell>{item.referralDate}</TableCell>
                         <TableCell><button>Called</button></TableCell>
-                        <TableCell><button>Scheduled</button></TableCell>
+                        <TableCell><button onClick={() => this.scheduledPateint(index)}>Scheduled</button></TableCell>
                     </TableRow>
                 ))
             )

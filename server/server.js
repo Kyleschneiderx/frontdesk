@@ -8,6 +8,7 @@ const app = express();
 
 const user = require('./routes/user')
 const patient = require('./routes/patient')
+const scheduled = require('./routes/scheduled')
 
 /// password ZCOqzxy8BjG62AiP
 // username admin_user50
@@ -34,8 +35,13 @@ app.use(express.json({
 //     extended: false
 // }))
 app.use(cookieParser());
+// app.use('/js/twilio.min.js', (req, res) => {
+//     res.sendFile('./node_modules/twilio-client/dist/twilio.min.js');
+// });
 app.use('/api/users', user);
 app.use('/api/patient', patient);
+app.use('/api/scheduled', scheduled);
+// app.use('/api/calls', calls);
 
 app.use(express.static('client/build'));
 

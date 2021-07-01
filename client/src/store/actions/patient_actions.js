@@ -3,7 +3,8 @@ import {
     P_ADD,
     P_CLEAR,
     P_UPDATE,
-    PS_GET
+    PS_GET,
+    P_DELETE
 } from '../types';
 
 
@@ -53,12 +54,25 @@ import {
 // }
 
 
-// export function clearBook(book){
-//     return{
-//         type: BOOK_CLEAR,
-//         payload: null
-//     }
-// }
+export function clearPatient(patient){
+    return{
+        type: P_CLEAR,
+        payload: null
+    }
+}
+
+export function deletePatient(patient){
+    console.log(patient)
+
+    const request = axios.delete('api/patient/', { data: patient})
+    .then( response => response.data);
+    return{
+        type: P_DELETE,
+        payload: request
+    }
+}
+
+
 
 export function getPatients(list){
     console.log("in the action")

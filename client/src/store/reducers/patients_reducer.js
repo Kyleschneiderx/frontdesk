@@ -2,7 +2,8 @@ import {
     P_ADD,
     P_CLEAR,
     P_UPDATE,
-    PS_GET
+    PS_GET,
+    P_DELETE
 } from '../types';
 
 

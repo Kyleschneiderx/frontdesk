@@ -13,3 +13,9 @@ export const P_ADD = 'p_add';
 export const P_CLEAR = 'p_clear';
 export const P_UPDATE= 'p_update';
 export const PS_GET= 'ps_get';
+export const P_DELETE = 'p_delete';
+
+
+// Scheduled
+
+export const S_ADD = 's_add'

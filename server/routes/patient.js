@@ -2,10 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 
-
-
 /// model
-// const {auth} = require('../middleware/auth')
+const {auth} = require('../middleware/auth')
 const {Patient} = require('../models/patient')
 
 
@@ -23,7 +21,7 @@ router.route('/')
 
 })
 
-.post((req,res)=>{
+.post(auth, (req,res)=>{
 
     console.log(req.body)
 
@@ -53,6 +51,15 @@ router.route('/')
 
 
 
+})
+
+.delete(auth, (req,res)=>{
+    console.log(req.body)
+    let id = req.body._id
+    Patient.findByIdAndRemove(id, (err, doc)=>{
+        if(err) return res.status(400).send(err)
+        res.json(true)
+    })
 })
 
 
