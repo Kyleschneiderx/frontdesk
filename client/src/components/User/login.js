@@ -54,7 +54,7 @@ class Login extends Component {
                     <hr/>
                     <h4>Sign in here:</h4>
                     <Formik
-                        initialValues={{email:'kyle@transplanet.net', password: 'Brothers25'}}
+                        initialValues={{email:'', password: ''}}
                         validationSchema={LoginSchema}
                         onSubmit={values =>{
                             console.log(values)

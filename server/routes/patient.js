@@ -21,7 +21,7 @@ router.route('/')
 
 })
 
-.post(auth, (req,res)=>{
+.post(auth,(req,res)=>{
 
     console.log(req.body)
 
@@ -52,6 +52,21 @@ router.route('/')
 
 
 })
+
+.patch(auth,(req,res)=>{
+    console.log(req.body)
+    Patient.findByIdAndUpdate(req.body._id, req.body, { new: true}, (err, doc)=>{
+        if(err) return res.status(400).send(err)
+        res.status(200).json({
+            success: true,
+            doc
+        })
+    })
+})
+
+
+
+
 
 .delete(auth, (req,res)=>{
     console.log(req.body)

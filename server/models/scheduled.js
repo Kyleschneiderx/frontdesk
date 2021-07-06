@@ -26,6 +26,10 @@ const scheduledSchema = mongoose.Schema({
     diagnosis: {
         type: String,
         required: false
+    },
+    called: {
+        type: Number,
+        required: false
     }
 
 },{timestamps:true})

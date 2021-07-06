@@ -3,7 +3,8 @@ import {
     P_CLEAR,
     P_UPDATE,
     PS_GET,
-    P_DELETE
+    P_DELETE,
+    P_CALLED
 } from '../types';
 
 
@@ -17,6 +18,8 @@ export default function(state={}, action){
             return {...state, update: action.payload }
         case PS_GET:
             return {...state, collection: action.payload}
+        case P_CALLED:
+            return {...state, update: action.payload }
         default: 
             return state;
     }

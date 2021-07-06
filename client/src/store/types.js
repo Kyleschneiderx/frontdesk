@@ -14,7 +14,7 @@ export const P_CLEAR = 'p_clear';
 export const P_UPDATE= 'p_update';
 export const PS_GET= 'ps_get';
 export const P_DELETE = 'p_delete';
-
+export const P_CALLED = 'p_called';
 
 // Scheduled
 

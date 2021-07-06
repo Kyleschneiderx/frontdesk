@@ -4,7 +4,8 @@ import {
     P_CLEAR,
     P_UPDATE,
     PS_GET,
-    P_DELETE
+    P_DELETE,
+    P_CALLED
 } from '../types';
 
 
@@ -61,9 +62,28 @@ export function clearPatient(patient){
     }
 }
 
+
+export function patientCalled(patient){
+
+    console.log(patient.called + 1)
+
+    const request = axios.patch('api/patient/', {...patient, called: patient.called + 1})
+    .then(response => {
+        return response.data
+    }).catch((err)=>{ 
+        return false
+    })
+
+    return{
+        type: P_CALLED,
+        payload: request
+    }
+}
+
+
+
 export function deletePatient(patient){
     console.log(patient)
-
     const request = axios.delete('api/patient/', { data: patient})
     .then( response => response.data);
     return{

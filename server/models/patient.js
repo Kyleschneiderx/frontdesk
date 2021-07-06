@@ -39,6 +39,10 @@ const patientSchema = mongoose.Schema({
     diagnosis: {
         type: String,
         required: 'n/a'
+    },
+    called: {
+        type: Number,
+        required: false
     }
 
 },{timestamps:true})
