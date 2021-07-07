@@ -2,8 +2,8 @@ const {User} =  require('../models/user');
 
 
 
-const auth = (req,res, next) => {
-    var token = req.cookies.auth;
+const api = (req,res, next) => {
+    var token = req.headers["x-access-token"];
     User.findByToken(token, (err, user) =>{
         if(err) throw err;
         if(!user) return res.send(false)
@@ -17,4 +17,4 @@ const auth = (req,res, next) => {
 };
 
 
-module.exports = {auth};
+module.exports = {api};

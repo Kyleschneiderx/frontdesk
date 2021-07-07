@@ -4,6 +4,7 @@ const router = express.Router();
 
 /// model
 const {auth} = require('../middleware/auth')
+const {api} = require('../middleware/apikey')
 const {Patient} = require('../models/patient')
 
 
@@ -21,9 +22,9 @@ router.route('/')
 
 })
 
-.post(auth,(req,res)=>{
+.post(api,(req,res)=>{
 
-    console.log(req.body)
+    console.log(req.body.name, "Name")
 
     const patient = new Patient({
         ...req.body

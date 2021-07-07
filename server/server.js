@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config/config').get(process.env.NODE_ENV)
 const app = express();
+const cors = require('cors');
 
 
 const user = require('./routes/user')
@@ -26,6 +27,7 @@ mongoose.connect(config.DATABASE,{
     useFindAndModify: false
 });
 
+app.use(cors());
 
 // MIDDLEWARE
 app.use(express.json({

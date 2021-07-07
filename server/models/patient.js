@@ -22,23 +22,23 @@ const patientSchema = mongoose.Schema({
     },
     dob:{
         type: String,
-        required: 'n/a'
+        required: false
     },
     phoneNumber:{
         type: String,
-        required: 'n/a'
+        required: false
     },
     referralDate:{
         type: String,
-        required: 'n/a'
+        required: false
     },
     location:{
         type: String,
-        required: 'n/a'
+        required: false
     },
     diagnosis: {
         type: String,
-        required: 'n/a'
+        required: false
     },
     called: {
         type: Number,

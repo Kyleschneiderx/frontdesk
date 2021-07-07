@@ -15,6 +15,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import * as Twilio from 'twilio-client';
+import moment from 'moment';
 
 
 
@@ -26,7 +27,7 @@ class Home extends Component {
     }
 
     componentDidMount(){
-        console.log("Get Patients")
+        console.log(this.props.patients.collection)
         
 
         this.props.dispatch(getPatients())
@@ -40,7 +41,8 @@ class Home extends Component {
     }
 
     call=(patient)=>{
-        this.props.dispatch(patientCalled(this.props.patients.collection[patient]))
+        console.log(this.props.patients.collection.find(item => item._id == patient))
+        this.props.dispatch(patientCalled(this.props.patients.collection.find(item => item._id == patient)))
         this.props.dispatch(getPatients())
         this.props.dispatch(getPatients())      
     }
@@ -51,9 +53,9 @@ class Home extends Component {
         // alert('Confirm Person has been scheduled')
         let answer = window.confirm("Are you sure this person is in the Schedule")
         if(answer){
-            console.log(this.props.patients.collection[key])
-            this.props.dispatch(addSchedule(this.props.patients.collection[key]))
-            this.props.dispatch(deletePatient(this.props.patients.collection[key]))
+            console.log(this.props.patients.collection.find(item => item._id == key))
+            this.props.dispatch(addSchedule(this.props.patients.collection.find(item => item._id == key)))
+            this.props.dispatch(deletePatient(this.props.patients.collection.find(item => item._id == key)))
             this.props.dispatch(getPatients())
             this.props.dispatch(getPatients())
         }
@@ -71,6 +73,16 @@ class Home extends Component {
                         return val
                     }else if (val.name.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
                         return val
+                    }else if (val.diagnosis.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
+                        return val
+                    }else if (val.location.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
+                        return val
+                    }else if (val.createdAt.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
+                        return val
+                    }else if (val.phoneNumber.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
+                        return val
+                    }else if (val.dob.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
+                        return val
                     }
 
                 }).map((item, index)=>(
@@ -81,9 +93,9 @@ class Home extends Component {
                         <TableCell>{item.diagnosis}</TableCell>
                         <TableCell>{item.location}</TableCell>
                         <TableCell>{item.phoneNumber}</TableCell>
-                        <TableCell>{item.referralDate}</TableCell>
-                        <TableCell><button className="Login-button button1" onClick={() => this.call(index)}><div>{item.called}</div>Called</button></TableCell>
-                        <TableCell><button className="Login-button button1" onClick={() => this.scheduledPateint(index)}>Scheduled</button></TableCell>
+                        <TableCell>{moment(item.createdAt).format("MM/DD/YY")}</TableCell>
+                        <TableCell><button className="Login-button button1" onClick={() => this.call(item._id)}><div>{item.called}</div>Called</button></TableCell>
+                        <TableCell><button className="Login-button button1" onClick={() => this.scheduledPateint(item._id)}>Scheduled</button></TableCell>
                     </TableRow>
                 ))
             )
@@ -116,8 +128,8 @@ class Home extends Component {
                                     <TableCell>Location</TableCell>
                                     <TableCell>Phone Number</TableCell>
                                     <TableCell>Referral Date</TableCell>
-                                    <TableCell>Call</TableCell>
-                                    <TableCell>Schedule</TableCell>
+                                    <TableCell></TableCell>
+                                    <TableCell></TableCell>
 
                                     
                                 </TableRow>
