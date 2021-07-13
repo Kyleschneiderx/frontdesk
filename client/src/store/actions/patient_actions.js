@@ -5,7 +5,9 @@ import {
     P_UPDATE,
     PS_GET,
     P_DELETE,
-    P_CALLED
+    P_CALLED,
+    P_NOTES_ADD,
+    P_NOTES_GET
 } from '../types';
 
 
@@ -91,6 +93,34 @@ export function deletePatient(patient){
         payload: request
     }
 }
+
+export function addPatientNotes(note){
+    console.log(note)
+    const request = axios.post('/api/notes/', note)
+    .then( response => response.data)
+
+
+    return{
+        type: P_NOTES_ADD,
+        payload: request
+    }
+}
+
+export function getPatientNotes(note){
+    console.log(note)
+    const request = axios.get('/api/notes/' ,{
+        params: {
+          noteList: note
+        }
+    })
+    .then(response => response.data)
+
+    return{
+        type: P_NOTES_GET,
+        payload: request
+    }
+}
+
 
 
 

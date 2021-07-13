@@ -43,7 +43,13 @@ const patientSchema = mongoose.Schema({
     called: {
         type: Number,
         required: false
-    }
+    },
+    notes:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Notes'
+        }
+    ]
 
 },{timestamps:true})
 

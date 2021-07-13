@@ -21,8 +21,6 @@ router.route('/schedule')
         })
     })
 
-
-
 })
 
 

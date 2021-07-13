@@ -70,7 +70,7 @@ router.route('/')
 
 
 .delete(auth, (req,res)=>{
-    console.log(req.body)
+    console.log(req.query.noteList)
     let id = req.body._id
     Patient.findByIdAndRemove(id, (err, doc)=>{
         if(err) return res.status(400).send(err)

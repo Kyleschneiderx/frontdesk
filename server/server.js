@@ -10,6 +10,7 @@ const cors = require('cors');
 const user = require('./routes/user')
 const patient = require('./routes/patient')
 const scheduled = require('./routes/scheduled')
+const notes = require('./routes/notes')
 
 /// password ZCOqzxy8BjG62AiP
 // username admin_user50
@@ -43,6 +44,7 @@ app.use(cookieParser());
 app.use('/api/users', user);
 app.use('/api/patient', patient);
 app.use('/api/scheduled', scheduled);
+app.use('/api/notes', notes);
 // app.use('/api/calls', calls);
 
 app.use(express.static('client/build'));
