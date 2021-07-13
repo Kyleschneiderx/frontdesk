@@ -11,6 +11,7 @@ const PatientNotes =(props)=>{
         <div className="popup">
             <div className="popup-inner">
                  <button className="Login-button close-btn" onClick={()=> props.setTrigger(false) }>Close</button>
+                 <button className="edit-btn" onClick={()=>console.log("edit")}></button>
                  <br/>
                  {props.children}
             </div>      

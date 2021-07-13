@@ -24,7 +24,7 @@ router.route('/')
 
 .post(api,(req,res)=>{
 
-    console.log(req.body.name, "Name")
+    console.log(req.body.name, "Name ")
 
     const patient = new Patient({
         ...req.body
@@ -70,7 +70,7 @@ router.route('/')
 
 
 .delete(auth, (req,res)=>{
-    console.log(req.query.noteList)
+    console.log(req.body)
     let id = req.body._id
     Patient.findByIdAndRemove(id, (err, doc)=>{
         if(err) return res.status(400).send(err)

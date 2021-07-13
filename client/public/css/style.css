@@ -89,7 +89,7 @@ h1 {
     padding: 10px;
 }
 
-input{
+/* input{
     width: 100%;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -98,7 +98,36 @@ input{
     background-color: white;
     background-position: 10px 10px; 
     background-repeat: no-repeat;
-    /* background-image:url(<i class="fa fa-search" aria-hidden="true"></i>) ; */
+    background-size: 20px 20px;
+    background-image:url('../search-solid.svg');
+    padding: 12px 20px 12px 40px;
+} */
+
+.search-input{
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-image:url('../search-solid.svg');
+    padding: 12px 20px 12px 40px;
+}
+
+.notes-input{
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-image:url('../clipboard-regular.svg');
     padding: 12px 20px 12px 40px;
 }
 
@@ -224,6 +253,33 @@ input{
     border: 2px solid #3fbcc5; */
 
 }
+
+.popup-inner .edit-btn{
+    position:   absolute;
+    top:        5px;
+    left:       5px;
+    background-image: url('../edit-solid.svg');
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-color: #fff ; /* Green */
+    border: solid rgba(0, 0, 0, 0.25);
+    color: white;
+    padding: 20px 20px;
+    background-position: center;
+    align-items: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+    /* background-color: white; 
+    color: black; 
+    border: 2px solid #3fbcc5; */
+}
+
+
 .popup-card-container{
     padding: 5px;
 }

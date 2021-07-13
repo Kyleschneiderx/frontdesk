@@ -120,47 +120,56 @@ class Home extends Component {
 
 
     showPatients =(patients) => {
-        if(patients.collection){
-            return(
-                patients.collection.filter(val=>{
-                    if(this.state.patientSearch == ''){
-                        return val
-                    }else if (val.name.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
-                        return val
-                    }else if (val.diagnosis.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
-                        return val
-                    }else if (val.location.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
-                        return val
-                    }else if (val.createdAt.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
-                        return val
-                    }else if (val.phoneNumber.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
-                        return val
-                    }else if (val.dob.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
-                        return val
-                    }
+        try{
+            if(patients.collection){
+                return(
+                    patients.collection.filter(val=>{
+                        if(this.state.patientSearch == ''){
+                            return val
+                        }else if (val.name.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
+                            return val
+                        }else if (val.diagnosis.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
+                            return val
+                        }else if (val.location.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
+                            return val
+                        }else if (val.createdAt.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
+                            return val
+                        }else if (val.phoneNumber.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
+                            return val
+                        }else if (val.dob.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
+                            return val
+                        }
 
-                }).slice(0).reverse().map((item, index)=>(
-                    <TableRow key={index}>
-                        <TableCell>
-                            <a onClick={()=> this.goToPopup(item._id)}>{item.name}</a>
-                        </TableCell>
-                        <TableCell>{item.diagnosis}</TableCell>
-                        <TableCell>{item.location}</TableCell>
-                        <TableCell>{item.phoneNumber}</TableCell>
-                        <TableCell>{moment(item.createdAt).format("MM/DD/YY")}</TableCell>
-                        <TableCell><button className="Login-button button1" onClick={() => this.call(item._id)}><div>{item.called}</div>Called</button></TableCell>
-                        <TableCell><button className="Login-button button1" onClick={() => this.scheduledPateint(item._id)}>Scheduled</button></TableCell>
-                    </TableRow>
-                ))
-            )
+                    }).slice(0).reverse().map((item, index)=>(
+                        <TableRow key={index}>
+                            <TableCell>
+                                <a onClick={()=> this.goToPopup(item._id)}>{item.name}</a>
+                            </TableCell>
+                            <TableCell>{item.diagnosis}</TableCell>
+                            <TableCell>{item.location}</TableCell>
+                            <TableCell>{item.phoneNumber}</TableCell>
+                            <TableCell>{moment(item.createdAt).format("MM/DD/YY")}</TableCell>
+                            <TableCell><button className="Login-button button1" onClick={() => this.call(item._id)}><div>{item.called}</div>Called</button></TableCell>
+                            <TableCell><button className="Login-button button1" onClick={() => this.scheduledPateint(item._id)}>Scheduled</button></TableCell>
+                        </TableRow>
+                    ))
+                )
 
-        }
-        return false
+            }
+            return 
+    }catch(e){
+        console.log(e)
+        return(
+            <div>
+                <h1>Sorry something seams to have gone wrong :( please try refreshing the page!!!</h1>
+            </div>
+        )
+    }
     }
 
 
     showNotes=(patients)=>{
-        console.log(patients)
+        console.log(typeof patients)
         try{
             if(patients){
                 return(patients.slice(0).reverse().map((item, index)=>(
@@ -180,7 +189,15 @@ class Home extends Component {
                 ))
                 )
             }
+            // if(!patients){
+            //     return (
+            //         <div>
+            //             No Posts
+            //         </div>
+            //     )
+            // }
             return false
+
         }catch(error){
             console.log(error)
         }
@@ -199,7 +216,8 @@ class Home extends Component {
                 <hr/>
                 <div className="App-container">
                 <div className='index-container'>
-                    <input type="text" name="search" placeholder="Search Patient" onChange={e=>this.setState({patientSearch: e.target.value})}/>
+                    <input className='search-input' type="text" name="search" placeholder="Search Patient" onChange={e=>this.setState({patientSearch: e.target.value})}/>
+
                 </div>
 
                 <div className='index-container'>
@@ -282,7 +300,7 @@ class Home extends Component {
                                         onBlur={handleBlur}
                                         value={values.note}
                                         placeholder="Place Note Here..."
-                                        className="u-full-width"
+                                        className="notes-input"
                                         />
                                         { errors.note && touched.note ? 
                                             <div className="error_label">{errors.note}</div>
