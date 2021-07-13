@@ -20,7 +20,7 @@ header {
 }
 
 .Login-button {
-    background-color: #4CAF50; /* Green */
+    background-color: red; /* Green */
     border: none;
     color: white;
     padding: 16px 32px;
@@ -35,7 +35,7 @@ header {
 }
   
 .Login-button:hover {
-    background-color: #3fbcc5; /* Green */
+    background-color: #3fbcc5; 
     color: white;
 }
 
@@ -219,8 +219,40 @@ input{
     position: absolute;
     right: 16px;
     top: 16;
+    /* background-color: white; 
+    color: black; 
+    border: 2px solid #3fbcc5; */
 
 }
+.popup-card-container{
+    padding: 5px;
+}
+
+/* .popup-outer-scroll{
+    overflow-y:auto;
+} */
+
+.popup-card{
+    position: relative;
+    padding: 20px;
+    border: 2px solid #3fbcc5;
+    border-radius: 12px;
+    box-shadow: 5px 5px 2.5px #3fbcc5
+}
+
+.popup-card .detail{
+    position:absolute;
+    bottom:0;
+    right:0;
+    padding:5px;
+}
+
+.note-container{
+    padding: 5px; 
+
+}
+
+
 a:hover {
     cursor:pointer;
 }

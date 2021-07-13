@@ -89,19 +89,23 @@ class Home extends Component {
         // console.log(patient)
         this.setState({turnOnPatientNotes: true})
         const patientData = this.props.patients.collection.find(item => item._id == patient)
-        // console.log(patientData.notes)
+        console.log(patientData)
         this.setState({patientNotes: patientData.notes, pId: patientData._id})
+        
         this.props.dispatch(getPatientNotes(patientData.notes))
 
     }
 
     addNote = async (values)=>{
         const patientData = await this.props.patients.collection.find(item => item._id == this.state.pId)
+        console.log(patientData)
         const calls = await this.props.dispatch(addPatientNotes({patientId: this.state.pId,userId:this.props.user.userData.id,content: values.note}))
 
         // console.log(calls)
         // this.goToPopup(this.state.pId)
         const callP = await this.props.dispatch(getPatients())
+        console.log(callP)
+        // const t = await this.props.dispatch(getPatientNotes(patientData.notes))
         // console.log(callP)
         const getPNotes = await this.goToPopup(this.state.pId)
         // const t = await this.props.dispatch(getPatientNotes(patientData.notes))
@@ -156,24 +160,30 @@ class Home extends Component {
 
 
     showNotes=(patients)=>{
-        // console.log(patients)
-        if(patients){
-            return(patients.slice(0).reverse().map((item, index)=>(
-               <div key={index}> 
-                    <div>
-                        {item.content}
+        console.log(patients)
+        try{
+            if(patients){
+                return(patients.slice(0).reverse().map((item, index)=>(
+                <div className='popup-card-container'> 
+                    <div className='popup-card' key={index}> 
+                        <div>
+                            <h2>{item.content}</h2>
+                        </div>
+                        <div className='detail'>
+                            {`Created by ${item.creator.name} on ${moment(item.createdAt).format('MMM Do YYYY')} at ${moment(item.createdAt).format('hh:mm')}`}
+                        </div>
+                            {/* <div>
+                                {`${moment(item.createdAt).format('MMM Do YYYY')} at ${moment(item.createdAt).format('hh:mm')}`}
+                            </div> */}
                     </div>
-                    {/* <div>
-                        {item.creator.name}
-                    </div>
-                    <div>
-                        {item.createdAt}
-                    </div> */}
                 </div>
                 ))
-            )
+                )
+            }
+            return false
+        }catch(error){
+            console.log(error)
         }
-        return false
     }
 
     
@@ -299,7 +309,7 @@ class Home extends Component {
                         )}
                     </Formik>
                     <hr/>
-                    <div className="popup-outer-scroll">
+                    <div className='note-container'>
                         {this.showNotes(this.props.patients.notesList)}
                     </div>
                 </PatientNotes>  
