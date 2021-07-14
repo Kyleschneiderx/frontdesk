@@ -136,8 +136,6 @@ class Home extends Component {
                             return val
                         }else if (val.phoneNumber.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
                             return val
-                        }else if (val.dob.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
-                            return val
                         }
 
                     }).slice(0).reverse().map((item, index)=>(
