@@ -7,54 +7,55 @@ import {
     P_DELETE,
     P_CALLED,
     P_NOTES_ADD,
-    P_NOTES_GET
+    P_NOTES_GET,
+    P_GET
 } from '../types';
 
 
 
 
 
-// export function editBook(book){
-//     const request = axios.patch('/api/books/book', book)
-//     .then(response => {
-//         return response.data
-//     }).catch((err)=>{ 
-//         return false
-//     })
+export function editPatient(patient){
+    const request = axios.patch('/api/patient/edit', patient)
+    .then(response => {
+        return response.data
+    }).catch((err)=>{ 
+        return false
+    })
 
 
-// return{
-//     type: BOOK_UPDATE,
-//     payload: request
-// }
-// }
+return{
+    type: P_UPDATE,
+    payload: request
+}
+}
 
-// export function getBook(bookId){
-//     const request = axios.get(`/api/books/book?id=${bookId}`)
-//         .then(response => {
-//             return response.data
-//         }).catch((err)=>{
-//             return false
-//         })
-
-
-//     return{
-//         type: BOOK_GET,
-//         payload: request
-//     }
-// }
+export function getPatient(patientId){
+    const request = axios.get(`/api/patient/edit?id=${patientId}`)
+        .then(response => {
+            return response.data
+        }).catch((err)=>{
+            return false
+        })
 
 
-// export function addBook(book){
-//     const request = axios.post('/api/books/book', book)
-//     .then( response => response.data)
+    return{
+        type: P_GET,
+        payload: request
+    }
+}
 
 
-//     return{
-//         type: BOOK_ADD,
-//         payload: request
-//     }
-// }
+export function addPatient(patient){
+    const request = axios.post('/api/patient/add', patient)
+    .then( response => response.data)
+
+
+    return{
+        type: P_ADD,
+        payload: request
+    }
+}
 
 
 export function clearPatient(patient){

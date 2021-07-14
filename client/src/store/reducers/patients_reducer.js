@@ -6,7 +6,8 @@ import {
     P_DELETE,
     P_CALLED,
     P_NOTES_ADD,
-    P_NOTES_GET
+    P_NOTES_GET,
+    P_GET
 } from '../types';
 
 
@@ -20,6 +21,8 @@ export default function(state={}, action){
             return {...state, add: action.payload, single: action.payload, update:  action.payload }
         case P_UPDATE:
             return {...state, update: action.payload }
+        case P_GET:
+            return {...state, single: action.payload }
         case PS_GET:
             return {...state, collection: action.payload, notesList:[]}
         case P_NOTES_ADD:

@@ -80,4 +80,49 @@ router.route('/')
 
 
 
+
+router.route('/add')
+
+.post(auth ,(req,res)=>{
+
+    console.log(req.body.name, "Name ")
+
+    const patient = new Patient({
+        ...req.body
+    });
+
+    patient.save((err, doc)=>{
+        if(err) return res.status(400).send(err)
+        res.status(200).json({
+            post:true,
+            patientId: doc._id
+        })
+    })
+})
+
+router.route('/edit')
+
+.patch(auth,(req,res)=>{
+    Patient.findByIdAndUpdate(req.body._id, req.body, {new: true}, (err, doc)=>{
+        if(err) return res.status(400).send(err)
+        res.status(200).json({
+            success: true,
+            doc
+        })
+    })
+})
+
+
+.get((req,res)=>{
+    let id = req.query.id
+    Patient
+    .find({_id: id})
+    .populate('ownerId', 'name lastname')
+    .exec((err, doc) =>{
+        if(err) return res.status(400).send(err)
+        res.send(...doc)
+    })
+
+})
+
 module.exports = router;

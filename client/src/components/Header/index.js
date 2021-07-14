@@ -7,7 +7,7 @@ import logo from '../../LCPT_Logo2016_horizontal_for_referral.png'
 const Header = (props) =>{
     return(
         <header>
-            <Link to='/' className='logo'>
+            <Link to='/home' className='logo'>
                 <img src={logo} />
             </Link>
         </header>

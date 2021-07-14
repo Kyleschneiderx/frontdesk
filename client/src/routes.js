@@ -5,6 +5,8 @@ import Home from './components/Home'
 import Login from './components/User/login'
 import MainLayout from './hoc/mainLayout'
 import Auth from './hoc/auth'
+import AddPatient from './components/Patient/Add'
+import EditPatient from './components/Patient/Edit'
 
 
 const Routes = () =>{
@@ -12,6 +14,8 @@ const Routes = () =>{
         <BrowserRouter>
             <MainLayout>
                 <Switch>
+                    <Route path='/edit/:id' component={Auth(EditPatient)}/>
+                    <Route path='/add' component={Auth(AddPatient)}/>
                     <Route path='/home' component={Auth(Home)}/>
                     <Route path='/' component={Login}/>
                 </Switch>

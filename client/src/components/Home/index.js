@@ -268,7 +268,7 @@ class Home extends Component {
                          </div>
                         </div> */}
                 </div> 
-                <PatientNotes trigger={this.state.turnOnPatientNotes} setTrigger={this.turnOffPopup}>
+                <PatientNotes trigger={this.state.turnOnPatientNotes} setTrigger={this.turnOffPopup} id={this.state.pId}>
                 <h4>Post Notes Here:</h4>
                     <Formik
                         initialValues={{note:''}}
@@ -294,7 +294,7 @@ class Home extends Component {
                                 <div className="row">
                                     <div className='twelve columns'>
                                         <input
-                                        type="note"
+                                        type="text"
                                         name="note"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
