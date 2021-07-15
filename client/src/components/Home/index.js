@@ -19,7 +19,7 @@ import moment from 'moment';
 import PatientNotes from '../../components/PatientNotes/patientNotes'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { async } from 'q';
+import {Link} from 'react-router-dom';
 
 
 const NoteSchema = Yup.object().shape({
@@ -211,12 +211,14 @@ class Home extends Component {
                 <h1>
                   Referred Patients
                 </h1>
+                <div className='add-patient-div'>
+                    <Link to='/add'><button className="Login-button button1">Add Patient+</button></Link>
+                </div>
                 <hr/>
                 <div className="App-container">
-                <div className='index-container'>
-                    <input className='search-input' type="text" name="search" placeholder="Search Patient" onChange={e=>this.setState({patientSearch: e.target.value})}/>
-
-                </div>
+                    <div className='index-container'>
+                        <input className='search-input' type="text" name="search" placeholder="Search Patient" onChange={e=>this.setState({patientSearch: e.target.value})}/>
+                    </div>
 
                 <div className='index-container'>
                     <TableContainer>

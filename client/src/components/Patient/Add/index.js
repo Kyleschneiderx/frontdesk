@@ -114,7 +114,12 @@ class AddPatient extends Component {
                                         className="input"
                                         >
                                         <option default>Select a Location</option>
-                                        <option default>Hayden</option>
+                                        <option>Lake City Physical Therapy, CDA</option>
+                                        <option>Lake City Physical Therapy - Hayden</option>
+                                        <option>Lake City Physical Therapy - Spokane Valley</option>       
+                                        <option>Lake City Physical Therapy - Post Falls</option>
+                                        <option>Lake City Physical Therapy - Rathdrum</option>
+
                                         </select>
                                         { errors.location && touched.location ? 
                                             <div className="error_label">{errors.location}</div>

@@ -334,3 +334,9 @@ a:hover {
     padding: 100px;
 
 }
+
+.add-patient-div{
+    position:absolute;
+    right: 16px;
+    top: 115px;
+}
