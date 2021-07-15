@@ -340,3 +340,8 @@ a:hover {
     right: 16px;
     top: 115px;
 }
+
+.linear-progress{
+    background: #3fbcc5 ;
+    background-color: #3fbcc5;
+}

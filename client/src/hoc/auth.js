@@ -3,6 +3,14 @@ import {auth} from '../store/actions/user_actions';
 import {connect} from 'react-redux';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
+const styles = {
+    root: {
+      flexGrow: 1
+    },
+    colorPrimary: {
+      background: 'green'
+    }
+  };
 
 export default function(ComposedClass, reload) {
     class AuthenticationCheck extends Component{
@@ -32,7 +40,7 @@ export default function(ComposedClass, reload) {
 
         render(){
             if(this.state.loading){
-                return <LinearProgress />
+                return <LinearProgress style={{backgroundColor: "#3fbcc5"}}/>
                 // <div className= "loader">Loading...</div>
             }else{
                 return <ComposedClass {...this.props} user={this.props.user}/>
