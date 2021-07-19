@@ -14,7 +14,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import * as Twilio from 'twilio-client';
 import moment from 'moment';
 import PatientNotes from '../../components/PatientNotes/patientNotes'
 import { Formik } from 'formik';
@@ -35,12 +34,14 @@ class Home extends Component {
         patientSearch: '',
         turnOnPatientNotes: false,
         patientNotes: [],
-        pId: ''
+        pId: '',
+        userClinic: ''
     }
 
     componentDidMount(){
         console.log(this.props.patients.collection)
         this.props.dispatch(getPatients())
+        this.setState({userClinic: this.props.user.userData.clinic})
         // axios.get('http://localhost:3001/api/patient/')
         // .then((response) => response.data)
         // .then(patientsList => {
@@ -120,10 +121,18 @@ class Home extends Component {
 
 
     showPatients =(patients) => {
+        console.log(this.state.userClinic)
         try{
             if(patients.collection){
                 return(
-                    patients.collection.filter(val=>{
+                    patients.collection
+                    .filter(clinic =>{
+                        console.log(clinic)
+                        if(clinic.location.toLowerCase().includes(this.state.userClinic.toLocaleLowerCase())){
+                            return clinic
+                        }
+                    })
+                    .filter(val=>{
                         if(this.state.patientSearch == ''){
                             return val
                         }else if (val.name.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
@@ -136,9 +145,7 @@ class Home extends Component {
                             return val
                         }else if (val.phoneNumber.toLowerCase().includes(this.state.patientSearch.toLocaleLowerCase())){
                             return val
-                        }
-
-                    }).slice(0).reverse().map((item, index)=>(
+                        }}).slice(0).reverse().map((item, index)=>(
                         <TableRow key={index}>
                             <TableCell>
                                 <a onClick={()=> this.goToPopup(item._id)}>{item.name}</a>
@@ -204,8 +211,7 @@ class Home extends Component {
     
     render(){
         // console.log(this.props.patients.collection)
-        // console.log(this.props.patients.notesList)
-
+        console.log(this.props.user.userData.clinic)
         return (
             <div>
                 <h1>
@@ -216,10 +222,20 @@ class Home extends Component {
                 </div>
                 <hr/>
                 <div className="App-container">
-                    <div className='index-container'>
+                <div className='search-container'>
+                    <div className='inner-search-container'>
                         <input className='search-input' type="text" name="search" placeholder="Search Patient" onChange={e=>this.setState({patientSearch: e.target.value})}/>
                     </div>
-
+                    <div className='inner-select-container'>
+                        <select className="select-input" onChange={e=>this.setState({userClinic: e.target.value})}>
+                            <option value="CDA" >CDA</option>
+                            <option value="HAYDEN">HAYDEN</option>
+                            <option value="SPOKANE VALLEY">SV</option>
+                            <option value="POST FALLS">PF</option>
+                            <option value="RATHDRUM">RATHDRUM</option>
+                        </select>
+                    </div>
+                </div> 
                 <div className='index-container'>
                     <TableContainer>
                         <Table>

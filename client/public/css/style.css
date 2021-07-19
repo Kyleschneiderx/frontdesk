@@ -121,7 +121,7 @@ select{
 }
 
 .search-input{
-    width: 100%;
+    /* flex-grow: 3; */
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -132,6 +132,20 @@ select{
     background-size: 20px 20px;
     background-image:url('../search-solid.svg');
     padding: 12px 20px 12px 40px;
+}
+.select-input{
+    /* flex-grow:2; */
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    /* background-position: 10px 10px;  */
+    background-repeat: no-repeat;
+    /* background-size: 20px 20px; */
+    /* background-image:url('../search-solid.svg'); */
+    padding: 12px 20px 12px 40px;
+
 }
 
 .notes-input{
@@ -344,4 +358,22 @@ a:hover {
 .linear-progress{
     background: #3fbcc5 ;
     background-color: #3fbcc5;
+}
+
+.search-container{
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+}
+
+.search-container .inner-search-container{
+   width: 80%;
+   flex-basis: 1;
+}
+
+.search-container .inner-select-container{
+    width: 20%;
+    flex-basis: 2;
 }

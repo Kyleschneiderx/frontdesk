@@ -44,6 +44,10 @@ const patientSchema = mongoose.Schema({
         type: Number,
         required: false
     },
+    doctor:{
+        type: String,
+        required: false
+    },
     notes:[
         {
             type: Schema.Types.ObjectId,

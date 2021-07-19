@@ -30,7 +30,17 @@ const scheduledSchema = mongoose.Schema({
     called: {
         type: Number,
         required: false
-    }
+    },
+    doctor:{
+        type: String,
+        required: false
+    },
+    notes:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Notes'
+        }
+    ]
 
 },{timestamps:true})
 

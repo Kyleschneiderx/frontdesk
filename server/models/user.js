@@ -26,6 +26,9 @@ const userSchema = mongoose.Schema({
         type: String,
         maxlength: 100
     },
+    clinic:{
+        type: String
+    },
     role:{
         type: Number,
         default: 0

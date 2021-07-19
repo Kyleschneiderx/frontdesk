@@ -51,7 +51,8 @@ router.post('/login', (req, res) =>{
                         id: user._id,
                         email: user.email,
                         name: user.name,
-                        lastname: user.lastname
+                        lastname: user.lastname,
+                        clinic:user.clinic
                     }
 
                 })
@@ -68,7 +69,8 @@ router.get('/auth', auth, (req, res) =>{
             id: req.user._id,
             email: req.user.email,
             name: req.user.name,
-            lastname: req.user.lastname
+            lastname: req.user.lastname,
+            clinic:req.user.clinic
 
         }
     })
