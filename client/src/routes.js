@@ -7,6 +7,7 @@ import MainLayout from './hoc/mainLayout'
 import Auth from './hoc/auth'
 import AddPatient from './components/Patient/Add'
 import EditPatient from './components/Patient/Edit'
+import ApiKey from './components/User/apikey'
 
 
 const Routes = () =>{
@@ -16,6 +17,7 @@ const Routes = () =>{
                 <Switch>
                     <Route path='/edit/:id' component={Auth(EditPatient)}/>
                     <Route path='/add' component={Auth(AddPatient)}/>
+                    <Route path='/key' component={Auth(ApiKey)}/>
                     <Route path='/home' component={Auth(Home)}/>
                     <Route path='/' component={Login}/>
                 </Switch>
