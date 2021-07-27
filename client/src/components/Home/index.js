@@ -4,7 +4,7 @@ import axios from 'axios';
 // import { getBooks } from '../../store/actions/book_actions';
 // import {RowGenerator, GenreateRowsWithBlocks} from '../../utils/helpers';
 import Patient from '../../components/Patient'
-import { getPatients, deletePatient, patientCalled, addPatientNotes, clearPatient, getPatientNotes } from '../../store/actions/patient_actions'
+import { getPatients, deletePatient, patientCalled, addPatientNotes, clearPatient, getPatientNotes, editPatientNotes } from '../../store/actions/patient_actions'
 import { addSchedule } from '../../store/actions/scheduled_actions'
 import {connect} from 'react-redux';
 
@@ -199,6 +199,43 @@ class Home extends Component {
     }
     }
 
+    cancelNoteEdit= async(item, index)=>{
+        this.setState({
+            editNote:false,
+            noteIndex: ''
+        })
+        const patientData = await this.props.patients.collection.find(item => item.creator_id == this.state.pId)
+        console.log(patientData)
+
+        const callP = await this.props.dispatch(getPatients())
+        console.log(callP)
+        // const t = await this.props.dispatch(getPatientNotes(patientData.notes))
+        // console.log(callP)
+        const getPNotes = await this.goToPopup(this.state.pId)
+
+    }
+
+    updateNotes = async (item, index) =>{
+        console.log(item)
+        console.log(index)
+        await this.props.dispatch(editPatientNotes({...item, content: this.state.noteContent }))
+
+        this.setState({
+            editNote:false,
+            noteIndex: ''
+        })
+        const patientData = await this.props.patients.collection.find(item => item.creator_id == this.state.pId)
+        console.log(patientData)
+
+        const callP = await this.props.dispatch(getPatients())
+        console.log(callP)
+        // const t = await this.props.dispatch(getPatientNotes(patientData.notes))
+        // console.log(callP)
+        const getPNotes = await this.goToPopup(this.state.pId)
+
+
+    }
+
 
     showNotes=(patients)=>{
         console.log(this.state.editNote)
@@ -209,12 +246,12 @@ class Home extends Component {
                 <div className='popup-card-container'> 
                     <div className='popup-card' key={index}> 
                         {this.state.editNote && index === this.state.noteIndex ? <div>
-                            <input className='input-edit' value={item.content}/>
+                            <input className='input-edit' defaultValue={item.content} onChange={e=>this.setState({noteContent: e.target.value})}/>
                             <div className="login-button-padding">
-                                <button className="Login-button button1">
+                                <button className="Login-button button1" onClick={()=> this.updateNotes(item, index)}>
                                     Save
                                 </button>
-                                <button className="Login-button button1">
+                                <button className="Login-button button1" onClick={()=>this.cancelNoteEdit(item, index)}>
                                     Cancel
                                 </button>
                             </div>

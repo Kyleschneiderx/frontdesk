@@ -8,8 +8,27 @@ import {
     P_CALLED,
     P_NOTES_ADD,
     P_NOTES_GET,
+    P_NOTES_UPDATE,
     P_GET
 } from '../types';
+
+
+
+export function editPatientNotes(note){
+    console.log(note)
+    const request = axios.patch('/api/notes/edit', note)
+    .then(response => {
+        return response.data
+    }).catch((err)=>{ 
+        return false
+    })
+
+
+    return{
+    type: P_NOTES_UPDATE,
+    payload: request
+    }
+}
 
 
 
@@ -24,10 +43,10 @@ export function editPatient(patient){
     })
 
 
-return{
+    return{
     type: P_UPDATE,
     payload: request
-}
+    }
 }
 
 export function getPatient(patientId){

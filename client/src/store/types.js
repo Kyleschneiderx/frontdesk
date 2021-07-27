@@ -18,6 +18,7 @@ export const P_DELETE = 'p_delete';
 export const P_CALLED = 'p_called';
 export const P_NOTES_ADD = 'p_notes_add'
 export const P_NOTES_GET = 'p_notes_get'
+export const P_NOTES_UPDATE = 'p_notes_update'
 
 // Scheduled
 
