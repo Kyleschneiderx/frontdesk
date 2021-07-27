@@ -62,4 +62,23 @@ router.route('/')
     // })
 })
 
+
+
+router.route('/edit')
+
+.patch(auth,(req,res)=>{
+    Notes.findByIdAndUpdate(req.body._id, req.body, {new: true}, (err, doc)=>{
+        if(err) return res.status(400).send(err)
+        res.status(200).json({
+            success: true,
+            doc
+        })
+    })
+})
+
+
+
+
+
+
 module.exports = router;

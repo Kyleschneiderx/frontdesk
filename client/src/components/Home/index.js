@@ -35,7 +35,10 @@ class Home extends Component {
         turnOnPatientNotes: false,
         patientNotes: [],
         pId: '',
-        userClinic: ''
+        userClinic: '',
+        editNote: false,
+        noteIndex: '',
+        noteContent: ''
     }
 
     componentDidMount(){
@@ -64,6 +67,27 @@ class Home extends Component {
         this.props.dispatch(getPatients())      
     }
 
+    editOneNote = async (item, index)=>{
+        console.log(item)
+        console.log(index)
+
+        await this.setState({
+            editNote:true,
+            noteIndex: index
+        })
+        console.log(item.creator._id)
+
+        const patientData = await this.props.patients.collection.find(item => item.creator_id == this.state.pId)
+        console.log(patientData)
+
+        const callP = await this.props.dispatch(getPatients())
+        console.log(callP)
+        // const t = await this.props.dispatch(getPatientNotes(patientData.notes))
+        // console.log(callP)
+        const getPNotes = await this.goToPopup(this.state.pId)
+    }
+
+
     scheduledPateint=(key)=>{
 
 
@@ -82,7 +106,10 @@ class Home extends Component {
     }
 
     turnOffPopup=()=>{
-        this.setState({turnOnPatientNotes: false})
+        this.setState({turnOnPatientNotes: false,
+            editNote:false,
+            noteIndex: ''
+        })
         
     }
 
@@ -174,14 +201,29 @@ class Home extends Component {
 
 
     showNotes=(patients)=>{
-        console.log(typeof patients)
+        console.log(this.state.editNote)
+        console.log(this.state.noteIndex)
         try{
             if(patients){
                 return(patients.slice(0).reverse().map((item, index)=>(
                 <div className='popup-card-container'> 
                     <div className='popup-card' key={index}> 
+                        {this.state.editNote && index === this.state.noteIndex ? <div>
+                            <input className='input-edit' value={item.content}/>
+                            <div className="login-button-padding">
+                                <button className="Login-button button1">
+                                    Save
+                                </button>
+                                <button className="Login-button button1">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div> :
                         <div>
                             <h2>{item.content}</h2>
+                        </div>}
+                        <div className='edit-note-button' onClick={()=> this.editOneNote(item, index)}> 
+                            Edit
                         </div>
                         <div className='detail'>
                             {`Created by ${item.creator.name} on ${moment(item.createdAt).format('MMM Do YYYY')} at ${moment(item.createdAt).format('hh:mm')}`}
@@ -202,6 +244,8 @@ class Home extends Component {
             //     )
             // }
             return false
+
+
 
         }catch(error){
             console.log(error)
