@@ -3,7 +3,7 @@ const router = express.Router();
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH;
 const client = require('twilio')(accountSid, authToken);
-const VoiceResponse = require('twilio').twiml.VoiceResponse;
+
 
 
 
@@ -36,9 +36,9 @@ router.route('/voice')
     twiml.say(`Hi thank you for calling us back this is Lake City Physical Therapy's C-D-A front desk automated phone service, please stay on the line and we will try an connect you with a representative. If we cannot connect you with a representative please leave us a message and we'll get back to you as soon as possible, or go to lake-city-pt.com to find out more information. Thank You`);
     const dial = twiml.dial();
     dial.number(process.env.PHONE_CDA)
-    response.type('text/xml');
-    response.send(twiml.toString())
-    console.log(twiml.toString());
+    res.type('text/xml');
+    res.send(twiml.toString())
+    res.log(twiml.toString());
 
 })
 
