@@ -1,68 +1,54 @@
-// const express = require('express');
-// const router = express.Router();
-// require('dotenv').config()
-
-// const {auth} = require('../middleware/auth')
-
-// const AccessToken = require('twilio').jwt.AccessToken;
-// const VoiceGrant = AccessToken.VoiceGrant;
-// const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID;
-// const twilioApiKey = process.env.TWILIO_API_KEY;
-// const twilioApiSecret = process.env.TWILIO_API_SECRET;
-// const outgoingAppSid = process.env.OUTGOINGAPPSID;
-// const identity = 'kyle';
-// router.route('/token')
-// .get((req,res) =>{
-//     console.log('Ok')
-//     console.log(`Access token for ${identity}`);
-
-//     const voiceGrant = new VoiceGrant({
-//         outgoingApplicationSid: outgoingAppSid,
-//         incomingAllow: true,
-//     });
-//     const token = new AccessToken(
-//         twilioAccountSid,
-//         twilioApiKey,
-//         twilioApiSecret,
-//         {identity: identity}
-//     );
-//     token.addGrant(voiceGrant);
-//     console.log('Access granted with JWT', token.toJwt());
-//     res.send(token.toJwt());
-    
-// })
-
-// // .post((req, res) => {
-// //     var number = req.body.number;
-// //     var url = 'https://fe7cd0642894.ngrok.io/api/calls/connect';
-
-// //     var options = {
-// //         to: request.body.phoneNumber,
-// //         from: process.env,
-// //         url: url,
-// //     };
-
-// //     client.calls.create(options)
-// //     .then((message) => {
-// //         console.log(message.responseText);
-// //         res.send({
-// //         message: 'Thank you! We will be calling you shortly.',
-// //     });
-// //     })
-// //     .catch((error) => {
-// //         console.log(error);
-// //         response.status(500).send(error);
-// //     });
-// // });
-
-// var VoiceResponse = twilio.twiml.VoiceResponse;
-// router.route('/connect')
-// .post((req, res) => {
-//   var twiml = new VoiceResponse();
-//   var dial = twiml.dial();
-//   dial.number(req.body.number);
-//   res.send(twiml.toString());
-// })
+const express = require('express');
+const router = express.Router();
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH;
+const client = require('twilio')(accountSid, authToken);
+const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
 
-// module.exports = router;
+
+const {auth} = require('../middleware/auth')
+
+router.route('/')
+.post(auth, async (req, res)=>{
+
+    console.log(process.env.TWILIO_ACCOUNT_SID)
+    console.log(process.env.TWILIO_AUTH)
+
+    console.log(req.body, 'Called')
+    await client.calls.create({
+        machineDetection: 'DetectMessageEnd',
+        twiml: `<Response><Say>Hi ${req.body.name} this is an automated phone message from Lake City Physical Therapys front desk letting you know that we recieved a referral from your doctor and we should be reach out to you about setting up an appointment. Please feel free to call anytime if you have a preferred appointmnet date and time at 208-667-1988 and if we can't get to the phone please leave us a message and we'll get back to you as soon as possible, Thank You and have a nice day</Say></Response>`,
+        to:`+1${req.body.phoneNumber}`,
+        from: '+12082132122',
+        method: "POST"
+    }).then(call => console.log(call, "This is the call"));
+
+
+
+})
+
+router.route('/voice')
+.post((req, res)=>{
+
+    const VoiceResponse = require('twilio').twiml.VoiceResponse;
+    const twiml = new VoiceResponse();
+    twiml.say(`Hi thank you for calling us back this is Lake City Physical Therapy's C-D-A front desk automated phone service, please stay on the line and we will try an connect you with a representative. If we cannot connect you with a representative please leave us a message and we'll get back to you as soon as possible, or go to lake-city-pt.com to find out more information. Thank You`);
+    const dial = twiml.dial();
+    dial.number(process.env.PHONE_CDA)
+    response.type('text/xml');
+    response.send(twiml.toString())
+    console.log(twiml.toString());
+
+})
+
+
+
+
+
+
+
+
+
+
+module.exports = router;

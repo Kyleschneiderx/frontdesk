@@ -19,6 +19,7 @@ export const P_CALLED = 'p_called';
 export const P_NOTES_ADD = 'p_notes_add'
 export const P_NOTES_GET = 'p_notes_get'
 export const P_NOTES_UPDATE = 'p_notes_update'
+export const P_AUTO_CALL ='p_auto_call'
 
 // Scheduled
 

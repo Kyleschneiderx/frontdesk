@@ -14,6 +14,9 @@ import {
 
 
 
+
+
+
 export function editPatientNotes(note){
     console.log(note)
     const request = axios.patch('/api/notes/edit', note)
@@ -29,9 +32,6 @@ export function editPatientNotes(note){
     payload: request
     }
 }
-
-
-
 
 
 export function editPatient(patient){
@@ -95,6 +95,17 @@ export function patientCalled(patient){
     }).catch((err)=>{ 
         return false
     })
+
+    const call = axios.post('api/calls/', {...patient})
+    .then(response => {
+        return response.data
+    }).catch((err)=>{ 
+        return false
+    })
+
+
+
+
 
     return{
         type: P_CALLED,
