@@ -12,6 +12,7 @@ const patient = require('./routes/patient')
 const scheduled = require('./routes/scheduled')
 const notes = require('./routes/notes')
 const calls = require('./routes/calls')
+const file = require('./routes/file')
 
 /// password ZCOqzxy8BjG62AiP
 // username admin_user50
@@ -47,6 +48,7 @@ app.use('/api/patient', patient);
 app.use('/api/scheduled', scheduled);
 app.use('/api/notes', notes);
 app.use('/api/calls', calls);
+app.use('/api/file', file)
 
 app.use(express.static('client/build'));
 

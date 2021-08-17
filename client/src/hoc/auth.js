@@ -12,7 +12,7 @@ const styles = {
     }
   };
 
-export default function(ComposedClass, reload) {
+export default function(ComposedClass, reload, roleCheck=false) {
     class AuthenticationCheck extends Component{
 
         state={
@@ -22,7 +22,11 @@ export default function(ComposedClass, reload) {
         componentDidMount(){
             this.props.dispatch(auth()).then(response =>{
                 let user = this.props.user.auth;
+                let role = this.props.user.userData.role
 
+                console.log(role)
+                // console.log(user)
+                console.log(roleCheck)
                 this.setState({loading:false})
                 if(!user){
                     if(reload){
@@ -32,7 +36,15 @@ export default function(ComposedClass, reload) {
                     if(reload === false){
                         this.props.history.push('/home')
                     }
-                    
+                    // if(reload && role !== 1){
+                    //     this.props.history.push('/billers')
+                    // }
+                    if(roleCheck && reload && role === 1 ){
+                        this.props.history.push('/home')
+                    }
+                    if( reload && roleCheck === false && role == 2 ){
+                        this.props.history.push('/billers')
+                    }
                 }
 
             })

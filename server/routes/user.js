@@ -70,7 +70,8 @@ router.get('/auth', auth, (req, res) =>{
             email: req.user.email,
             name: req.user.name,
             lastname: req.user.lastname,
-            clinic:req.user.clinic
+            clinic:req.user.clinic,
+            role: req.user.role
 
         }
     })

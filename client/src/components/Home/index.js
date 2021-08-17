@@ -181,7 +181,7 @@ class Home extends Component {
                             <TableCell>{item.location}</TableCell>
                             <TableCell>{item.phoneNumber}</TableCell>
                             <TableCell>{moment(item.createdAt).format("MM/DD/YY")}</TableCell>
-                            <TableCell><button className="Login-button button1" onClick={() => this.call(item._id)}><div>{item.called}</div>Called</button></TableCell>
+                            <TableCell><button className="Login-button button1" onClick={() => this.call(item._id)}><div>{item.called}</div>Sent Message</button></TableCell>
                             <TableCell><button className="Login-button button1" onClick={() => this.scheduledPateint(item._id)}>Scheduled</button></TableCell>
                         </TableRow>
                     ))
@@ -444,7 +444,8 @@ class Home extends Component {
                         })} */}
                 </div>
             </div>
-          );
+
+        );
 
     }
 
