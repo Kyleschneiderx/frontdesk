@@ -382,9 +382,23 @@ a:hover {
     /* justify-content: center; */
 }
 
+.search-container-billing{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .search-container .inner-search-container{
-   width: 80%;
+   width: 100%;
    flex-basis: 1;
+}
+
+.search-container-billing .inner-billing-container{
+    width: 65%;
+    flex-basis: 1;
+
 }
 
 .search-container .inner-select-container{

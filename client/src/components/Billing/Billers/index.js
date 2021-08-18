@@ -8,8 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {massAddPatietCall, getPatientCallList, deletePatient} from '../../../store/actions/file_actions'
-import { Redirect } from 'react-router-dom';
-import { ConversationPage } from 'twilio/lib/rest/conversations/v1/conversation';
+import { Redirect, Link } from 'react-router-dom';
 
 
 
@@ -18,6 +17,7 @@ import { ConversationPage } from 'twilio/lib/rest/conversations/v1/conversation'
 const Billers = (props) => {
 
     const [patientList, setPatientList] = useState()
+    const [search, setSearch] = useState('')
     const dispatch = useDispatch()
     const file = useSelector(state => state.file.callsList);
     const user = useSelector(state => state.user.userData)
@@ -40,9 +40,17 @@ const Billers = (props) => {
 
     };
 
-    console.log(user.role)
         return (
+        <div>
             <div className="App-container">
+                <div className='search-container-billing'>
+                    <div className='inner-billing-container'>
+                        <input className='search-input' type="text" name="search" placeholder="Search Patient" onChange={e=> setSearch(e.target.value)}/>
+                    </div>
+                    <div className='add-patient-div'>
+                        <Link to='/billers/add'><button className="Login-button button1">Add Patient+</button></Link>
+                    </div>
+                </div> 
                 <hr/>
                 <div className='index-container'>
                     <TableContainer>
@@ -56,7 +64,17 @@ const Billers = (props) => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                    {file ? file.map(pat =>{
+                                    {file ? file
+                                        .filter(val=>{
+                                        if(search == ''){
+                                            return val
+                                        }else if (val.name.toLowerCase().includes(search.toLocaleLowerCase())){
+                                            return val
+                                        }else if (val.number.toLowerCase().includes(search.toLocaleLowerCase())){
+                                            return val
+                                        }else if (val.patientID.toLowerCase().includes(search.toLocaleLowerCase())){
+                                            return val
+                                        }}).map(pat =>{
                                         return (
                                         <TableRow key={pat.patientID}>
                                             <TableCell>{pat.patientID}</TableCell>
@@ -72,6 +90,7 @@ const Billers = (props) => {
                 </div>
     
             </div>
+        </div>
         )
 
     

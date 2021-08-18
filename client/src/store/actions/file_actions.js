@@ -5,7 +5,8 @@ import {
  MF_ADD,
  F_ADD,
  FS_GET,
- F_DELETE
+ F_DELETE,
+ F_CLEAR
 } from '../types';
 
 
@@ -37,8 +38,10 @@ export function getPatientCallList(){
 }
 
 
-export function addPatietCall(note){
-    const request = axios.post('/api/file/add', note)
+export function addPatietCall(patient){
+
+    console.log(patient)
+    const request = axios.post('/api/file/addone', {...patient, name: patient.firstname, patientID: patient.id, file_name:'manually'})
     .then( response => response.data)
 
 
@@ -56,5 +59,13 @@ export function deletePatient(patient){
     return{
         type: F_DELETE,
         payload: request
+    }
+}
+
+
+export function clearFile(patient){
+    return{
+        type: F_CLEAR,
+        payload: null
     }
 }

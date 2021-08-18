@@ -2,7 +2,8 @@
 import {
     MF_ADD,
     F_ADD,
-    FS_GET
+    FS_GET,
+    F_CLEAR
 } from '../types';
 
 
@@ -14,6 +15,8 @@ export default function(state={}, action){
         case MF_ADD:
             return {...state, add: action.payload }
         case F_ADD:
+            return {...state, add: action.payload, single: action.payload, update:  action.payload }
+        case F_CLEAR:
             return {...state, add: action.payload, single: action.payload, update:  action.payload }
         default: 
             return state;

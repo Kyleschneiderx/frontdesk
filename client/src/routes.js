@@ -10,7 +10,7 @@ import EditPatient from './components/Patient/Edit'
 import ApiKey from './components/User/apikey'
 import Billing from './components/Billing/Upload/index'
 import Billers from './components/Billing/Billers/'
-
+import AddCaller from './components/Billing/Add'
 
 
 const Routes = (props) =>{
@@ -20,6 +20,7 @@ const Routes = (props) =>{
             <MainLayout>
                 <Switch>
                     <Route path='/csvuploadbilling' component={Auth(Billing, true, true)}/>
+                    <Route path='/billers/add' component={Auth(AddCaller, true, true)}/> 
                     <Route path='/billers' component={Auth(Billers, true, true)}/> 
                     <Route path='/edit/:id' component={Auth(EditPatient, true, false)}/>
                     <Route path='/add' component={Auth(AddPatient, true, false)}/>

@@ -23,10 +23,6 @@ export default function(ComposedClass, reload, roleCheck=false) {
             this.props.dispatch(auth()).then(response =>{
                 let user = this.props.user.auth;
                 let role = this.props.user.userData.role
-
-                console.log(role)
-                // console.log(user)
-                console.log(roleCheck)
                 this.setState({loading:false})
                 if(!user){
                     if(reload){

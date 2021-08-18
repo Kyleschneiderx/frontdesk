@@ -9,7 +9,7 @@ const {Recipient} = require('../models/recipient')
 
 
 router.route('/')
-.post( async (req,res)=>{
+.post( auth, async (req,res)=>{
 
 
     Recipient.deleteMany({}).then(function(){
@@ -114,7 +114,7 @@ router.route('/')
     // })
 })
 
-.get((req, res)=>{
+.get(auth, (req, res)=>{
     Recipient
     .find()
     .exec((err, doc) =>{
@@ -123,7 +123,7 @@ router.route('/')
     })
 })
 
-.delete((req,res)=>{
+.delete(auth, (req,res)=>{
     console.log(req.body)
     let id = req.body._id
     Recipient.findByIdAndRemove(id, (err, doc)=>{
@@ -133,5 +133,21 @@ router.route('/')
 })
 
 
+
+
+router.route("/addone")
+.post((req, res)=>{
+    const recipient = new Recipient({
+        ...req.body
+    });
+
+    recipient.save((err, doc)=>{
+        if(err) return res.status(400).send(err)
+        res.status(200).json({
+            post:true,
+            recipientId: doc._id
+        })
+    })
+})
 
 module.exports = router;
