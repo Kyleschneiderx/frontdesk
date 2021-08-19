@@ -35,3 +35,4 @@ export const F_ADD = 'F_ADD';
 export const FS_GET = 'fs_get';
 export const F_DELETE = 'f_delete';
 export const  F_CLEAR = 'f_clear';
+export const F_CALL = 'f_call';

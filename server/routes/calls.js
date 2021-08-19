@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH;
-const client = require('twilio')(accountSid, authToken);
+
+const apiKey = process.env.TWILIO_API_KEY;
+const apiSecret = process.env.TWILIO_API_SECRET;
+const client = require('twilio')(apiKey, apiSecret, { accountSid: accountSid });
 
 
 
@@ -11,9 +13,6 @@ const {auth} = require('../middleware/auth')
 
 router.route('/')
 .post(auth, async (req, res)=>{
-
-    console.log(process.env.TWILIO_ACCOUNT_SID)
-    console.log(process.env.TWILIO_AUTH)
 
     console.log(req.body, 'Called')
     await client.calls.create({

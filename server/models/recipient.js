@@ -21,6 +21,10 @@ const recipientSchema = mongoose.Schema({
     called:{
         type: String,
         required: false
+    },
+    statements:{
+        type: Number,
+        required: false
     }
 
 },{timestamps:true})

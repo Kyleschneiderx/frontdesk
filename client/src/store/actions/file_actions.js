@@ -6,11 +6,27 @@ import {
  F_ADD,
  FS_GET,
  F_DELETE,
- F_CLEAR
+ F_CLEAR,
+ F_CALL
 } from '../types';
 
 
 
+
+
+
+export function callPatients(day){
+    console.log("In Call Patient")
+    console.log(day)
+    const request = axios.post('/api/file/call', day)
+    .then( response => response.data)
+
+
+    return{
+        type: F_CALL,
+        payload: null
+    }
+}
 
 
 

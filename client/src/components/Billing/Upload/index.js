@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {connect, useDispatch, useSelector} from 'react-redux';
-import {massAddPatietCall, getPatientCallList, deletePatient} from '../../../store/actions/file_actions'
+import {massAddPatietCall, getPatientCallList, deletePatient, callPatients} from '../../../store/actions/file_actions'
 
 
 
@@ -54,11 +54,16 @@ const Billing = (props) => {
     const updateData =(result) => {
         let list = []
         var urls = result.data;
+        console.log(urls)
+        try{
         urls.forEach(item =>{
             console.log(item)
-            list.push({ called: false, file_name:csvfile.name , patientID: item.PatientID, name: item.Name.split(' ')[1] , number:`+1${item.PatientMobilePhone.split('.')[0]}`})
+            list.push({ called: false, file_name:csvfile.name , patientID: item.PatientID, name: item.Name.split(' ')[1] , number:`+1${item.Number.split('.')[0]}`, statements: item.Statements})
         });
-        console.log(typeof(list))
+        }catch(err){
+            console.log(err)
+        }
+        console.log(list)
         sendData(list)
     }
     
@@ -66,6 +71,18 @@ const Billing = (props) => {
        dispatch(massAddPatietCall(urls))
        dispatch(getPatientCallList())
        dispatch(getPatientCallList())
+    }
+
+    const callMultiplePatients = (day) =>{
+
+        let answer = window.confirm("Are you sure you want to call all patients?")
+        if(answer){
+
+            dispatch(callPatients(day))
+
+        }
+
+
     }
 
     return (
@@ -81,7 +98,10 @@ const Billing = (props) => {
             onChange={handleChange}
             />
             <p />
-            <button className="Login-button button1" onClick={importCSV}> Upload now!</button>
+            <div className='row'>
+                <button className="Login-button button1" onClick={importCSV}> Upload now!</button>
+                <button className="Login-button button1" onClick={() => callMultiplePatients(1)}> Call Patients!</button>
+            </div>
             <hr/>
             <div className='index-container'>
                 <TableContainer>

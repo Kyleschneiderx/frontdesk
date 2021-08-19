@@ -1,6 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+
+const apiKey = process.env.TWILIO_API_KEY;
+const apiSecret = process.env.TWILIO_API_SECRET;
+const client = require('twilio')(apiKey, apiSecret, { accountSid: accountSid });
+
 
 /// model
 const {auth} = require('../middleware/auth')
@@ -136,7 +142,7 @@ router.route('/')
 
 
 router.route("/addone")
-.post((req, res)=>{
+.post(auth, (req, res)=>{
     const recipient = new Recipient({
         ...req.body
     });
@@ -149,5 +155,35 @@ router.route("/addone")
         })
     })
 })
+
+
+
+
+
+router.route('/call')
+.post(auth, async (req, res)=>{
+
+
+
+
+    const recipients =  await Recipient
+    .find()
+    
+    recipients.forEach(patient =>{
+
+        client.calls.create({
+            machineDetection: 'DetectMessageEnd',
+            twiml: `<Response><Say>Hi ${patient.name} this is an automated phone message from Lake City Physical Therapy just letting you know that you have an outstanding balance. Please at your earliest convenience give our billing department a call back at 208-966-4176 or visit our website at lake-city-pt.com and navigate to the patient payment portal. If this information seems incorrect please contact us to resolve the matter, Thank You and have a nice day</Say></Response>`,
+            to:`${patient.number}`,
+            from: '+12082132661',
+            method: "POST"
+        }).then(call => console.log(call, "This is the call"))
+
+    })
+
+
+})
+
+
 
 module.exports = router;
