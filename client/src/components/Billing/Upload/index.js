@@ -17,14 +17,15 @@ const Billing = (props) => {
 
     const [csvfile, setCsvfile ] = useState(undefined)
     const [patientList, setPatientList] = useState()
+    const [day, setDay] = useState('Total')
     const dispatch = useDispatch()
     const file = useSelector(state => state.file.callsList);
 
 
     useEffect(() => {
-        dispatch(getPatientCallList())
+        dispatch(getPatientCallList(day))
         setPatientList(file)
-    }, [patientList])
+    }, [patientList, day])
 
 
     const deletePerson =(id)=>{
@@ -74,7 +75,7 @@ const Billing = (props) => {
     }
 
     const callMultiplePatients = (day) =>{
-
+        console.log(day)
         let answer = window.confirm("Are you sure you want to call all patients?")
         if(answer){
 
@@ -97,10 +98,20 @@ const Billing = (props) => {
             placeholder={null}
             onChange={handleChange}
             />
+            <div className='inner-select-container'>
+                <select className="select-input" onChange={e => setDay(e.target.value)}>
+                    <option value="Total">Total</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thurdsay</option>
+                    <option value="Friday">Friday</option>
+                </select>
+            </div>
             <p />
             <div className='row'>
                 <button className="Login-button button1" onClick={importCSV}> Upload now!</button>
-                <button className="Login-button button1" onClick={() => callMultiplePatients(1)}> Call Patients!</button>
+                <button className="Login-button button1" onClick={() => callMultiplePatients(day)}> Call Patients!</button>
             </div>
             <hr/>
             <div className='index-container'>
@@ -108,6 +119,7 @@ const Billing = (props) => {
                     <Table>
                         <TableHead>
                             <TableRow>
+                                <TableCell>Index</TableCell>
                                 <TableCell>ID</TableCell>
                                 <TableCell>Name</TableCell>
                                 <TableCell>Phone Number</TableCell>
@@ -115,9 +127,10 @@ const Billing = (props) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                                {file ? file.map(pat =>{
+                                {file ? file.map((pat, index) =>{
                                     return (
                                     <TableRow key={pat.patientID}>
+                                        <TableCell>{index}</TableCell>
                                         <TableCell>{pat.patientID}</TableCell>
                                         <TableCell>{pat.name}</TableCell>
                                         <TableCell>{pat.number}</TableCell>

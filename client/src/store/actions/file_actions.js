@@ -18,13 +18,17 @@ import {
 export function callPatients(day){
     console.log("In Call Patient")
     console.log(day)
-    const request = axios.post('/api/file/call', day)
+    const request = axios.post('/api/file/call', {
+        params: {
+          dayOfWeek: day
+        }
+    })
     .then( response => response.data)
 
 
     return{
         type: F_CALL,
-        payload: null
+        payload: request
     }
 }
 
@@ -43,8 +47,13 @@ export function massAddPatietCall(patientList){
     }
 }
 
-export function getPatientCallList(){
-    const request = axios.get('/api/file/')
+export function getPatientCallList(day){
+    console.log(day)
+    const request = axios.get('/api/file/',{
+        params: {
+          dayOfWeek: day
+        }
+    })
     .then(response => response.data)
 
     return{
