@@ -21,12 +21,13 @@ const Billers = (props) => {
     const dispatch = useDispatch()
     const file = useSelector(state => state.file.callsList);
     const user = useSelector(state => state.user.userData)
+    const [day, setDay] = useState('Total')
 
 
     useEffect(() => {
-        dispatch(getPatientCallList())
+        dispatch(getPatientCallList(day))
         setPatientList(file)
-    }, [patientList])
+    }, [patientList, day])
 
 
     const deletePerson =(id)=>{
@@ -51,6 +52,16 @@ const Billers = (props) => {
                         <Link to='/billers/add'><button className="Login-button button1">Add Patient+</button></Link>
                     </div>
                 </div> 
+                <div className='inner-select-container'>
+                    <select className="select-input" onChange={e => setDay(e.target.value)}>
+                        <option value="Total">Total</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thurdsay</option>
+                        <option value="Friday">Friday</option>
+                    </select>
+                </div>
                 <hr/>
                 <div className='index-container'>
                     <TableContainer>
