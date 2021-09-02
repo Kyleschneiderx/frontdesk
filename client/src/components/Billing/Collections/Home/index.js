@@ -58,7 +58,7 @@ const Collections = (props) => {
                         <input className='search-input' type="text" name="search" placeholder="Search Patient" onChange={e=> setSearch(e.target.value)}/>
                     </div>
                     <div className='add-patient-div'>
-                        <Link to='/collections/add'><button className="Login-button button1">Add Patient+</button></Link>
+                        <Link to='/collections/add'><button className="Login-button button1">Add Collections+</button></Link>
                     </div>
                 </div> 
                 <div className='row'>

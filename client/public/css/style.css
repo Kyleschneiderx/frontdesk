@@ -11,12 +11,8 @@ header {
     height: 106px;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-
-
-
-
 }
 
 .Login-button {
@@ -410,4 +406,22 @@ a:hover {
 .adminLayout {
     height:100vh;
 }
+
+
+
+/*===Navigaction===*/
+
+
+
+header .open_nav {
+    position: absolute;
+    left:0px;
+}
+
+header .navbar {
+    position:absolute;
+    top: 35px;
+    left: 35px;
+}
+
 

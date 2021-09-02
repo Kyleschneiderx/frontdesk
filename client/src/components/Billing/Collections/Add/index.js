@@ -59,7 +59,7 @@ const AddCollectionsCaller = () => {
     return (
         <div className="patient-input-container">
             <div>
-                <h4>Add Patient Here:</h4>
+                <h4>Add Patient to Collections Here:</h4>
                         <form onSubmit={formik.handleSubmit}>
                             <div className="row">
                                 <div className='twelve_columns'>
