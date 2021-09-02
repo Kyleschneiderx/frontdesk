@@ -71,7 +71,8 @@ router.get('/auth', auth, (req, res) =>{
             name: req.user.name,
             lastname: req.user.lastname,
             clinic:req.user.clinic,
-            role: req.user.role
+            role: req.user.role,
+            plaidToken: req.user.plaidToken
 
         }
     })

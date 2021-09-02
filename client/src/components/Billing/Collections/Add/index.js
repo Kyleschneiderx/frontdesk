@@ -3,7 +3,7 @@ import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addPatietCall, clearFile } from '../../../store/actions/file_actions';
+import { addCollectionsCall, clearCollections,  } from '../../../../store/actions/collections_actions';
 import { useDispatch } from 'react-redux';
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
@@ -13,20 +13,20 @@ const PatientSchema = Yup.object().shape({
 
 })
 
-const AddCaller = () => {
+const AddCollectionsCaller = () => {
 
     const [success, setSuccess] = useState(false)
     const dispatch = useDispatch()
 
     useEffect(() => {
         console.log('Unmounted')
-        dispatch(clearFile())
+        dispatch(clearCollections())
 
     }, [success])
 
 
     const formik = useFormik({
-        initialValues:{ id:'',firstname:'',lastname:'', number:''},
+        initialValues:{ id:'',firstname:'',lastname:'', number:'', statements: ''},
         validationSchema:Yup.object({
             id:Yup.number()
             .required("Required !!"),
@@ -34,7 +34,8 @@ const AddCaller = () => {
             .required("Required !!"),
             number: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
             .required("Required"),
-            lastname: Yup.string()
+            lastname: Yup.string(),
+            statements: Yup.number().required("Required")
         }),
         onSubmit:(values,{resetForm})=>{
             handleSubmit(values)
@@ -44,7 +45,7 @@ const AddCaller = () => {
     });
 
     const handleSubmit = (values) => {
-        dispatch(addPatietCall(values))
+        dispatch(addCollectionsCall(values))
         console.log(values)
     }
 
@@ -127,6 +128,23 @@ const AddCaller = () => {
 
                                 </div>
                             </div>
+                            <div className="row">
+                                <div>
+                                    <input
+                                    type="text"
+                                    name="statements"
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.statements}
+                                    placeholder="Enter Number of statements sent..."
+                                    className="input"
+                                    />
+                                    { formik.errors.statements && formik.touched.statements ? 
+                                        <div className="error_label">{formik.errors.statements}</div>
+                                    :null}
+
+                                </div>
+                            </div>
                             <div className="login-button-padding">
                                 <button type="submit" className="Login-button button1">
                                     Add Patient
@@ -137,8 +155,8 @@ const AddCaller = () => {
                             success ?
                             <div className='succes_entry'>
                                 <div>Congrats!!</div>
-                                <Link to={`/billers`}>
-                                    See your Patient
+                                <Link to={`/collections`}>
+                                    See your Collections List
                                 </Link>
 
                             </div>
@@ -153,4 +171,4 @@ const AddCaller = () => {
 }
 
 
-export default AddCaller;
+export default AddCollectionsCaller;

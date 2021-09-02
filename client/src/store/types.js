@@ -36,3 +36,18 @@ export const FS_GET = 'fs_get';
 export const F_DELETE = 'f_delete';
 export const  F_CLEAR = 'f_clear';
 export const F_CALL = 'f_call';
+
+
+// Transactions
+
+export const GET_TRANS = 'get_trans'
+
+
+//// Collections
+
+
+export const C_ADD = 'c_add'
+export const CS_GET = 'cs_get'
+export const C_DELETE = 'c_delete'
+export const C_CLEAR = 'c_clear'
+export const C_CALL = 'c_call'

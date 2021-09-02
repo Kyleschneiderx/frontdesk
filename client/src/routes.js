@@ -11,7 +11,10 @@ import ApiKey from './components/User/apikey'
 import Billing from './components/Billing/Upload/index'
 import Billers from './components/Billing/Billers/'
 import AddCaller from './components/Billing/Add'
-
+import Link from './components/Billing/Link/index'
+import Deposits from './components/Billing/Deposits'
+import Collections from './components/Billing/Collections/Home'
+import AddCollectionsCaller from './components/Billing/Collections/Add';
 
 const Routes = (props) =>{
 
@@ -19,6 +22,10 @@ const Routes = (props) =>{
         <BrowserRouter>
             <MainLayout>
                 <Switch>
+                    <Route path='/collections/add' component={Auth(AddCollectionsCaller, true, true)}/>
+                    <Route path='/collections' component={Auth(Collections, true, true)}/>
+                    <Route path='/deposits' component={Auth(Deposits, true, true)}/>
+                    <Route path='/link' component={Auth(Link, true, true)}/>
                     <Route path='/csvuploadbilling' component={Auth(Billing, true, true)}/>
                     <Route path='/billers/add' component={Auth(AddCaller, true, true)}/> 
                     <Route path='/billers' component={Auth(Billers, true, true)}/> 
