@@ -15,6 +15,7 @@ import Link from './components/Billing/Link/index'
 import Deposits from './components/Billing/Deposits'
 import Collections from './components/Billing/Collections/Home'
 import AddCollectionsCaller from './components/Billing/Collections/Add';
+import Waitlist from './components/Waitlist'
 
 const Routes = (props) =>{
 
@@ -22,6 +23,7 @@ const Routes = (props) =>{
         <BrowserRouter>
             <MainLayout>
                 <Switch>
+                    <Route path='/waitlist' component={Auth(Waitlist, true, true)}/>
                     <Route path='/collections/add' component={Auth(AddCollectionsCaller, true, true)}/>
                     <Route path='/collections' component={Auth(Collections, true, true)}/>
                     <Route path='/deposits' component={Auth(Deposits, true, true)}/>

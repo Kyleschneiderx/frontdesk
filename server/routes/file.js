@@ -312,7 +312,7 @@ router.route('/call')
                 to:`${patient.number}`,
                 from: process.env.TWILIO_NUMBER,
                 method: "POST"
-            }).then(call => console.log(call, "This is the call"))
+            }).then(call => console.log(call, patient.name))
     
         })
 
@@ -332,7 +332,7 @@ router.route('/call')
                 to:`${patient.number}`,
                 from: process.env.TWILIO_NUMBER,
                 method: "POST"
-            }).then(call => console.log(call, "This is the call"))
+            }).then(call => console.log(call, patient.name))
     
         })
 

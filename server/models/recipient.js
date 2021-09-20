@@ -19,7 +19,7 @@ const recipientSchema = mongoose.Schema({
         required: false
     },
     called:{
-        type: String,
+        type: Boolean,
         required: false
     },
     statements:{
