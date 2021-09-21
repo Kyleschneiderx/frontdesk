@@ -9,14 +9,17 @@ import {
  W_TEXT
 } from '../types';
 
+import moment from 'moment'
 
 
 
 
 
-export function textWaitlist(){
+export function textWaitlist(time){
     console.log("Texting Patients")
-    const request = axios.post('/api/waitlist/text')
+    time.forEach(item => console.log(moment(item).format('MMMM Do, h:mm a')))
+    console.log(time)
+    const request = axios.post('/api/waitlist/text', time)
     .then( response => response.data)
 
 

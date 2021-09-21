@@ -20,7 +20,8 @@ import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDateTimePicker,
-  DateTimePicker
+  DateTimePicker,
+  alpha
 } from '@material-ui/pickers';
 import 'date-fns';
 import moment from 'moment'
@@ -38,8 +39,6 @@ const Waitlist = () => {
     const waitlist = useSelector(state => state.waitlist.waitlist);
     const user = useSelector(state => state.user.userData)
     const [day, setDay] = useState('Total')
-
-    console.log(waitlist)
 
     useEffect(() => {
         dispatch(getWaitlist())
@@ -79,7 +78,7 @@ const Waitlist = () => {
         let answer = window.confirm("Are you sure you want to text all all Patients")
         if(answer){
             // console.log(this.props.patients.collection.find(item => item._id == key))
-            dispatch(textWaitlist())
+            dispatch(textWaitlist(time))
             dispatch(getWaitlist())
         }
     }
@@ -89,18 +88,13 @@ const Waitlist = () => {
         <div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container justifyContent="center">
-            <KeyboardDateTimePicker
-                disableToolbar
+            <DateTimePicker
                 variant="dialog"
-                format="MM/dd/yyyy hh:mm"
+                format="MM/dd/yyyy hh:mm a"
                 margin="normal"
-                id="date-picker-dialog"
                 label="Add Opening"
                 value={endDate}
                 onChange={handleDateChange}
-                KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                }}
                 />
                 <Button onClick={()=> addTime()}>Add Time</Button>
                 <Button component={Link} to='/waitlist/add'>Add Patient</Button>

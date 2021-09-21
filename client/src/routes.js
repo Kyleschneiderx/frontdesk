@@ -24,8 +24,8 @@ const Routes = (props) =>{
         <BrowserRouter>
             <MainLayout>
                 <Switch>
-                    <Route path='/waitlist/add' component={Auth(AddWaitlist, true, true)}/>
-                    <Route path='/waitlist' component={Auth(Waitlist, true, true)}/>
+                    <Route path='/waitlist/add' component={Auth(AddWaitlist, true, false)}/>
+                    <Route path='/waitlist' component={Auth(Waitlist, true, false)}/>
                     <Route path='/collections/add' component={Auth(AddCollectionsCaller, true, true)}/>
                     <Route path='/collections' component={Auth(Collections, true, true)}/>
                     <Route path='/deposits' component={Auth(Deposits, true, true)}/>

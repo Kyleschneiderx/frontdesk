@@ -12,6 +12,8 @@ const client = require('twilio')(apiKey, apiSecret, { accountSid: accountSid });
 const {auth} = require('../middleware/auth')
 const {Waitlist} = require('../models/waitlist')
 
+const moment = require('moment')
+
 
 router.route("/")
 
@@ -60,13 +62,20 @@ router.route("/")
 router.route('/text')
 .post(auth, async (req, res)=>{
 
+    console.log(moment(req.body).format('MMMM Do, h:mm a'))
+
+
+    const times = [];
+    req.body.forEach(item => times.push(moment(item).format('MMMM Do [at] h:mm a')))
+
+
     const recipients =  await Waitlist
     .find()
         recipients.forEach(patient =>{
 
         console.log(patient)
         client.messages.create({
-            body: `Hi ${patient.name} we have openings at Lake City Physical Therapy at ${req.body.openings} if any of these times could work please give us a call at 208-667-1988. \n\ If you'd like to be removed from are text waitlist just REPLY : Remove `, 
+            body: `Hi ${patient.name} we have openings at Lake City Physical Therapy on ${times}. If your available for any of these times please give us a call at 208-667-1988. Its first come, first serve. Thank you an have a nice day. \n\If you'd like to be removed from are text waitlist just REPLY : Remove `, 
             to:`+1${patient.number}`,
             from: '+12082132661'
         }).then(message => console.log(message.sid, patient.name));
@@ -91,7 +100,10 @@ router.route('/sms/reply')
       res.end(twiml.toString());
       const person = req.body.From
       console.log(person.split('+1')[1])
-      Waitlist.findOneAndRemove({number: person.split('+1')[1]})
+      Waitlist.findOneAndDelete({'number': person.split('+1')[1]},(err, doc)=>{
+        if(err) console.log(err);
+        console.log("Successful deletion");
+      })
     
       
     }else{

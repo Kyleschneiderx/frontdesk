@@ -18,6 +18,8 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import CallIcon from '@material-ui/icons/Call';
+import PanToolIcon from '@material-ui/icons/PanTool';
+import QueueIcon from '@material-ui/icons/Queue';
 import { useSelector } from 'react-redux';
 
 const SideDrawer = ({signOutUser}) => {
@@ -25,11 +27,14 @@ const SideDrawer = ({signOutUser}) => {
     const users = useSelector(state => state.user)
 
     return(
-        <>
+        <>  
+            {users.auth ?
             <DehazeIcon
                 className="drawer_btn"
                 onClick={()=> setState(true)}
             />
+            :
+            null }
             <Drawer anchor={'left'} open={state} onClose={()=> setState(false)}>
                 <Divider/>
                 <List>
@@ -37,7 +42,7 @@ const SideDrawer = ({signOutUser}) => {
                         <ListItemIcon><HomeIcon/></ListItemIcon>
                         <ListItemText primary="Home"/>
                     </ListItem>
-{/* 
+                    {/*             
                     { !users.auth ?
                         <ListItem button component={RouterLink} to="/" onClick={()=>setState(false)}>
                             <ListItemIcon><VpnKeyIcon/></ListItemIcon>
@@ -57,7 +62,7 @@ const SideDrawer = ({signOutUser}) => {
                 </List>
                     { users.auth && users.userData.role === 2 ?
                         <>
-                            <Divider/>
+                        <Divider/>
                             <List>
                                 <ListItem button component={RouterLink} to="/billers" onClick={()=>setState(false)}>
                                     <ListItemIcon><CallIcon/></ListItemIcon>
@@ -66,6 +71,22 @@ const SideDrawer = ({signOutUser}) => {
                                 <ListItem button component={RouterLink} to="/collections" onClick={()=>setState(false)}>
                                     <ListItemIcon><AttachMoneyIcon/></ListItemIcon>
                                     <ListItemText primary="Collections List"/>
+                                </ListItem>
+                            </List>
+                        </>
+                    :null}
+
+                        { users.auth && users.userData.role === 1 ?
+                        <>
+                        <Divider/>
+                            <List>
+                                <ListItem button component={RouterLink} to="/home" onClick={()=>setState(false)}>
+                                    <ListItemIcon><QueueIcon/></ListItemIcon>
+                                    <ListItemText primary="Referral List"/>
+                                </ListItem>
+                                <ListItem button component={RouterLink} to="/waitlist" onClick={()=>setState(false)}>
+                                    <ListItemIcon><PanToolIcon/></ListItemIcon>
+                                    <ListItemText primary="WaitList"/>
                                 </ListItem>
                             </List>
                         </>
