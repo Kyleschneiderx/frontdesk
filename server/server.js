@@ -6,6 +6,7 @@ const config = require('./config/config').get(process.env.NODE_ENV)
 const app = express();
 const cors = require('cors');
 
+const urlencoded = require('body-parser').urlencoded;
 
 const user = require('./routes/user')
 const patient = require('./routes/patient')
@@ -15,6 +16,7 @@ const calls = require('./routes/calls')
 const file = require('./routes/file')
 const deposits = require('./routes/deposits')
 const collections = require('./routes/collections')
+const waitlist = require('./routes/waitlist')
 
 /// password ZCOqzxy8BjG62AiP
 // username admin_user50
@@ -41,6 +43,7 @@ app.use(express.json({
 // app.use(express.urlencoded({
 //     extended: false
 // }))
+app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use('/js/twilio.min.js', (req, res) => {
 //     res.sendFile('./node_modules/twilio-client/dist/twilio.min.js');
@@ -53,6 +56,7 @@ app.use('/api/calls', calls);
 app.use('/api/file', file)
 app.use('/api/deposits', deposits)
 app.use('/api/collections', collections)
+app.use('/api/waitlist', waitlist)
 
 app.use(express.static('client/build'));
 

@@ -51,3 +51,13 @@ export const CS_GET = 'cs_get'
 export const C_DELETE = 'c_delete'
 export const C_CLEAR = 'c_clear'
 export const C_CALL = 'c_call'
+
+
+
+///
+
+export const W_ADD = 'w_add'
+export const WS_GET = 'ws_get'
+export const W_DELETE = 'w_delete'
+export const W_CLEAR = 'w_clear'
+export const W_TEXT = 'w_text'
