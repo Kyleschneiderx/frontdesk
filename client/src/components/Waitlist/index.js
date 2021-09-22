@@ -142,7 +142,7 @@ const Waitlist = () => {
                                         return (
                                         <TableRow key={pat.patientID}>
                                             <TableCell>{pat.patientID}</TableCell>
-                                            <TableCell>{pat.name}</TableCell>
+                                            <TableCell>{pat.name} {pat.lastname}</TableCell>
                                             <TableCell>{pat.number}</TableCell>
                                             <TableCell><Button onClick={() => deletePerson(pat._id)}><DeleteIcon/></Button></TableCell>
                                         </TableRow>

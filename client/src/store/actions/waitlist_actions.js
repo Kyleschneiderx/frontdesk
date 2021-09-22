@@ -45,7 +45,7 @@ export function getWaitlist(){
 export function addWaitlist(patient){
 
     console.log(patient)
-    const request = axios.post('/api/waitlist/', {...patient, name: patient.firstname, patientID: patient.id})
+    const request = axios.post('/api/waitlist/', {...patient, lastname: patient.lastname, name: patient.firstname, patientID: patient.id})
     .then( response => response.data)
 
 

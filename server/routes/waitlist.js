@@ -75,7 +75,7 @@ router.route('/text')
 
         console.log(patient)
         client.messages.create({
-            body: `Hi ${patient.name} we have openings at Lake City Physical Therapy on ${times}. If your available for any of these times please give us a call at 208-667-1988. Its first come, first serve. Thank you an have a nice day. \n\If you'd like to be removed from are text waitlist just REPLY : Remove `, 
+            body: `Hi ${patient.name}, we have openings at Lake City Physical Therapy on ${times}. If your available for any of these times please give us a call at 208-762-2100. Its first come, first serve. Thank you and have a nice day. \n\If you'd like to be removed from are text waitlist just REPLY : Remove `, 
             to:`+1${patient.number}`,
             from: '+12082132661'
         }).then(message => console.log(message.sid, patient.name));
