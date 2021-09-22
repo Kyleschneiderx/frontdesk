@@ -42,7 +42,7 @@ export function getCollectionsCallList(){
 export function addCollectionsCall(patient){
 
     console.log(patient)
-    const request = axios.post('/api/collections/', {...patient, name: patient.firstname, patientID: patient.id, statements: patient.statements})
+    const request = axios.post('/api/collections/', {...patient, name: patient.firstname, lastname: patient.lastname, patientID: patient.id, statements: patient.statements})
     .then( response => response.data)
 
 

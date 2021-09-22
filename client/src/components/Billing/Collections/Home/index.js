@@ -92,7 +92,7 @@ const Collections = (props) => {
                                         return (
                                         <TableRow key={pat.patientID}>
                                             <TableCell>{pat.patientID}</TableCell>
-                                            <TableCell>{pat.name}</TableCell>
+                                            <TableCell>{pat.name} {pat.lastname}</TableCell>
                                             <TableCell>{pat.number}</TableCell>
                                             <TableCell>{pat.statements}</TableCell>
                                             <TableCell><button onClick={() => deletePerson(pat._id)}>X</button></TableCell>
