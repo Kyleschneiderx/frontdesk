@@ -12,7 +12,8 @@ const client = require('twilio')(apiKey, apiSecret, { accountSid: accountSid });
 const {auth} = require('../middleware/auth')
 const {Waitlist} = require('../models/waitlist')
 
-const moment = require('moment')
+// const moment = require('moment')
+var moment = require('moment-timezone');
 
 
 router.route("/")
@@ -63,7 +64,7 @@ router.route('/text')
 .post(auth, async (req, res)=>{
 
     const times = [];
-    req.body.forEach(item => times.push(moment(item).format('MMMM Do [at] h:mm a')))
+    req.body.forEach(item => times.push(` ${moment(item).tz("America/Los_Angeles").format('MMMM Do [at] h:mm a')}`))
 
     console.log(times)
 
@@ -73,7 +74,7 @@ router.route('/text')
 
         console.log(patient)
         client.messages.create({
-            body: `Hi ${patient.name}, we have openings at Lake City Physical Therapy on ${times}. If your available for any of these times please give us a call at 208-762-2100. Its first come, first serve. Thank you and have a nice day. \n\If you'd like to be removed from are text waitlist just REPLY : Remove `, 
+            body: `Hi ${patient.name}, we have openings at Lake City Physical Therapy on ${times}. If your available for any of these times please give us a call at 208-762-2100. It is first come, first serve. Thank you and have a nice day. \n\If you'd like to be removed from our text waitlist just REPLY : Remove `, 
             to:`+1${patient.number}`,
             from: '+12082132661'
         }).then(message => console.log(message.sid, patient.name));
