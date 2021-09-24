@@ -62,12 +62,10 @@ router.route("/")
 router.route('/text')
 .post(auth, async (req, res)=>{
 
-    console.log(moment(req.body).format('MMMM Do, h:mm a'))
-
-
     const times = [];
     req.body.forEach(item => times.push(moment(item).format('MMMM Do [at] h:mm a')))
 
+    console.log(times)
 
     const recipients =  await Waitlist
     .find()
