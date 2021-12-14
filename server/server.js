@@ -6,6 +6,7 @@ const config = require('./config/config').get(process.env.NODE_ENV)
 const app = express();
 const cors = require('cors');
 
+
 const urlencoded = require('body-parser').urlencoded;
 
 const user = require('./routes/user')
@@ -17,6 +18,7 @@ const file = require('./routes/file')
 const deposits = require('./routes/deposits')
 const collections = require('./routes/collections')
 const waitlist = require('./routes/waitlist')
+const providers = require('./routes/providers')
 
 /// password ZCOqzxy8BjG62AiP
 // username admin_user50
@@ -57,6 +59,7 @@ app.use('/api/file', file)
 app.use('/api/deposits', deposits)
 app.use('/api/collections', collections)
 app.use('/api/waitlist', waitlist)
+app.use('/api/providers', providers)
 
 app.use(express.static('client/build'));
 

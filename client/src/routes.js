@@ -17,6 +17,7 @@ import Collections from './components/Billing/Collections/Home'
 import AddCollectionsCaller from './components/Billing/Collections/Add';
 import Waitlist from './components/Waitlist'
 import AddWaitlist from './components/Waitlist/Add';
+import ProviderInfo from './components/Credentialing'
 
 const Routes = (props) =>{
 
@@ -24,6 +25,7 @@ const Routes = (props) =>{
         <BrowserRouter>
             <MainLayout>
                 <Switch>
+                    <Route path='/providercreds' component={ProviderInfo}/>
                     <Route path='/waitlist/add' component={Auth(AddWaitlist, true, false)}/>
                     <Route path='/waitlist' component={Auth(Waitlist, true, false)}/>
                     <Route path='/collections/add' component={Auth(AddCollectionsCaller, true, true)}/>
