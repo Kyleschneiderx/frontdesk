@@ -310,7 +310,7 @@ const PractitionerInfo = ({handleFormData, values}) => {
                     </Grid>
                     <Grid item xs={4}>
                         <select className="input" name="speciality" value={values.speciality} onChange={handleFormData("speciality")}>
-                            <option value="" disabled selected hidden>Choose a Specialty</option>
+                            <option defaultValue hidden>Choose a Specialty</option>
                             <option value='PCP'>PCP</option>
                             <option value='Urgent Care'>Urgent Care</option>
                             <option value='Specialist'>Specialist</option>
@@ -318,7 +318,7 @@ const PractitionerInfo = ({handleFormData, values}) => {
                     </Grid>
                     <Grid item xs={4}>
                         <select placeholder="Gender" className="input" name="gender" value={values.gender} onChange={handleFormData("gender")}>
-                            <option value="" disabled selected hidden>Choose a Gender</option>
+                            <option defaultValue hidden>Choose a Gender</option>
                             <option value='Male'>Male</option>
                             <option value='Female'>Female</option>
                         </select>

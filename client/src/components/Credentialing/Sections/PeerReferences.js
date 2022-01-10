@@ -1,4 +1,4 @@
-import React ,{useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import { 
     Button, 
     Grid, 
@@ -14,21 +14,20 @@ import {
 } from '@mui/material'
 
 
-
-const UnderGraduteEducation = ({handleChange, values, handleChangeList}) => {
-
+const PeerReferences = ({handleChange, values, handleChangeList}) => {
     const [data, setData] = useState({
-        doesNotApplyUndergraduateEducation: false,
-        nameOfCollegeOrUniversity:"",
-        degreeReceived:"",
-        graduationDate:"",
-        mailingAddress:'',
+        nameOfReference:"",
+        titleAndSpecialty:"",
+        mailingAddress:"",
         city:"",
         state:"",
-        zip:""
+        zip: "",
+        email:"",
+        phoneNumber: "",
+        faxNumber:"",
+        cellNumber:""
 
     })
-
     const [list , setList] = useState([])
 
     useEffect(() => {
@@ -40,70 +39,108 @@ const UnderGraduteEducation = ({handleChange, values, handleChangeList}) => {
     const addItem = () =>{
     
         console.log(list)
-        handleChangeList(list, 'underGraduateEducation')
+        handleChangeList(list, 'peerReferences')
         setData({
-            doesNotApplyUndergraduateEducation: false,
-            nameOfCollegeOrUniversity:"",
-            degreeReceived:"",
-            graduationDate:"",
-            mailingAddress:'',
+            nameOfReference:"",
+            titleAndSpecialty:"",
+            mailingAddress:"",
             city:"",
             state:"",
-            zip:""
+            zip: "",
+            email:"",
+            phoneNumber: "",
+            faxNumber:"",
+            cellNumber:""    
         })
     }
     
     let optionsList = [
         
         {
-            labelPlaceholder: "Name of college or university",
-            name: "nameOfCollegeOrUniversity",
-            size:12,
-
-        },
-        {
-            labelPlaceholder: "Degree received",
-            name: "degreeReceived",
+            labelPlaceholder: "Name of reference",
+            name: "nameOfReference",
             size:9,
+            tableLabel:"Name"
 
         },
         {
-            labelPlaceholder: "Graduation date",
-            name: "graduationDate",
+            labelPlaceholder: "Title and specialty",
+            name: "titleAndSpecialty",
             size:3,
+            tableLabel:"Title"
 
         },
         {
-            labelPlaceholder: "Mailing Address",
+            labelPlaceholder: "Mailing address",
             name: "mailingAddress",
             size:6,
+            tableLabel:"Address"
 
         },
         {
             labelPlaceholder: "City",
             name: "city",
             size:2,
+            tableLabel:"City"
 
         },
         {
             labelPlaceholder: "State",
             name: "state",
             size:2,
+            tableLabel:"State"
 
         },
         {
-            labelPlaceholder: "ZIP code",
+            labelPlaceholder: "Zip Code",
             name: "zip",
             size:2,
+            tableLabel:"Zip"
 
         },
+        {
+            labelPlaceholder: "Email Address",
+            name: "email",
+            size:3,
+            tableLabel:"Email"
+
+        },
+        {
+            labelPlaceholder: "Home Phone Number",
+            name: "phoneNumber",
+            size:3,
+            tableLabel:"Number"
+
+
+        },
+        {
+            labelPlaceholder: "Fax Number",
+            name: "faxNumber",
+            size:3,
+            tableLabel:"Fax"
+
+
+        },
+        {
+            labelPlaceholder: "Cell Phone Number",
+            name: "cellNumber",
+            size:3,
+            tableLabel:"Cell Number"
+            
+
+        }
+
 
     ]
+
+
+
+    
     return (
         <div>
             <Box sx={{ flexGrow: 1 }} >
                 <Grid container justifyContent='center'>
-                    <h2>UNDER-GRADUATE EDUCATION</h2>
+                    <h2>PEER REFERENCES</h2>
                 </Grid>
 
                 <Grid container spacing={1} padding={5}>
@@ -125,29 +162,33 @@ const UnderGraduteEducation = ({handleChange, values, handleChangeList}) => {
 
                 </Grid>
                 <Grid container justifyContent='center'>
-                    <Button onClick={()=>addItem()}> Add University</Button>
+                    <Button onClick={()=>addItem()}>Add Work Location</Button>
                 </Grid>
                 <Grid container spacing={1} padding={5} >
                 <TableContainer>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>College</TableCell>
-                                <TableCell>Degree</TableCell>
-                                <TableCell>Graduation Date</TableCell>
-                                <TableCell>Mailing Address</TableCell>        
+                                {optionsList.map((item, index)=>{
+                                    return(
+                                        <TableCell key={index}>{item.tableLabel}</TableCell>
+                                    )
+                                })}
+                                          
                             </TableRow>
                         </TableHead>
                             <TableBody>
-                            {values.underGraduateEducation ? values.underGraduateEducation.map((pat,index) =>{
+                            {values.peerReferences ? values.peerReferences.map((pat,index) =>{
                                     return (
-                            <TableRow key={index}>
-                                <TableCell>{pat.nameOfCollegeOrUniversity}</TableCell>
-                                <TableCell>{pat.degreeReceived}</TableCell>
-                                <TableCell>{pat.graduationDate}</TableCell>
-                                <TableCell>{pat.mailingAddress} {pat.city} {pat.state} {pat.zip}</TableCell>
+                                <TableRow key={index}>
 
-                            </TableRow>
+                                {optionsList.map((item, index)=>{
+                                    return(
+                                        <TableCell key={index}>{pat[item.name]}</TableCell>
+                                    )
+                                })}
+
+                                </TableRow>
                                 )
                             }): null}
                         </TableBody>
@@ -159,4 +200,5 @@ const UnderGraduteEducation = ({handleChange, values, handleChangeList}) => {
         </div>
     )
 }
-export default UnderGraduteEducation
+
+export default PeerReferences

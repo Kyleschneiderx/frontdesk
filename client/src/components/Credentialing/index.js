@@ -4,12 +4,38 @@ import PracticeInformation from './Sections/PracticeInformation';
 import UnderGraduteEducation from './Sections/UnderGraduteEducation';
 import ProLicence from './Sections/ProLicence';
 import AllProLicenses from './Sections/AllProLicenses';
-import { Stepper, Step, StepLabel, Button, Box} from '@mui/material';
+import MedicalProfessionalEducation from './Sections/MedicalProfessionalEducation';
+import GraduateEducation from './Sections/GraduateEducation';
+import WorkHistory from './Sections/WorkHistory';
+import PeerReferences from './Sections/PeerReferences';
+import ProfessionalLiability from './Sections/ProfessionalLiability';
+import ReviewPage from './Sections/ReviewPage'
+import { Stepper, Step, StepLabel, Button, Box, Grid} from '@mui/material';
 
 
 
 
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad', "another", 'Nothing'];
+const steps = ['Practitioner Information',
+'Practice Information',
+'Professional Licence',
+"All Other Professional Licence",
+'Undergraduate Education',
+'Medical/Professional Education',
+'Graduate Education',
+'Work History',
+'Peer References',
+'Professional Liability',
+
+
+// 'Intership/PGYI',
+// 'Residencies',
+// 'Frellowships',
+// 'Preceptorship',
+// 'Faculty Appointment',
+// 'Board Certifications',
+// 'Other Certifications',
+// 'Current Affilations'
+];
 
 
 
@@ -103,12 +129,8 @@ const ProviderInfo = (props) => {
 
       //// all professional Licenses
 
-      proLicenseDate:"",
-      licenseNumber:"",
-      proLicenseDateIssued:"",
-      proLicenseExpirationDate:"",
-      yearRelinquished:"",
-      proLicenseReason:"",
+
+      allOtherProLicenses:[],
 
       ///Under Graduate Education
 
@@ -119,17 +141,28 @@ const ProviderInfo = (props) => {
 
       /// Graduate Education
 
+      graduateEducationIntuition:"",
+      graduateEducationProgramOrCourseOfStudy:"",
+      graduateEducationFacultyDirector:"",
+      graduateEducationMailingAddress:"",
+      graduateEducationCity:"",
+      graduateEducationState:"",
+      graduateEducationZip:"",
+      graduateEducationDateAttended:"",
+      graduateEducationPhone:"",
+      graduateEducationFax:"",
 
+      /// Work History
 
+      workHistory:[],
 
+      ///Peer References
 
+      peerReferences:[],
 
+      //// Professional Liability
 
-
-
-
-
-
+      professionalLiability:[]
 
 
 
@@ -144,15 +177,58 @@ const ProviderInfo = (props) => {
           case 1:
             return <PracticeInformation handleChangeLocation={handleChangeLocation1} handleFormData={handleInputData} values={formData}/>;
           case 2:
-            return <ProLicence/>;
+            return <ProLicence handleFormData={handleInputData} values={formData}/>;
           case 3:
-            return <AllProLicenses/>;
+            return <AllProLicenses handleFormData={handleInputData} handleChangeList={handleListChange} values={formData}/>;
           case 4:
-              return <UnderGraduteEducation/>;
+              return <UnderGraduteEducation handleFormData={handleInputData} handleChangeList={handleListChange} values={formData}/>;
+          case 5:
+              return <MedicalProfessionalEducation handleFormData={handleInputData} handleChangeList={handleListChange} values={formData}/>;
+          case 6:
+              return <GraduateEducation handleFormData={handleInputData} handleChangeList={handleListChange} values={formData}/>;
+          case 7:
+              return <WorkHistory handleFormData={handleInputData} handleChangeList={handleListChange} values={formData}/>;
+          case 8:
+              return <PeerReferences handleFormData={handleInputData} handleChangeList={handleListChange} values={formData}/>;
+          case 9:
+              return <ProfessionalLiability handleFormData={handleInputData} handleChangeList={handleListChange} values={formData}/>;
           default:
-            return <div>Not Found</div>;
+            return <ReviewPage values={formData}/>;
         }
     }
+
+    /// Skip state
+
+    function skipContent(step) {
+      switch (step) {
+        case 4 : setFormData({...formData, underGraduateEducation : [
+          {
+            doesNotApplyUndergraduateEducation: true,
+            nameOfCollegeOrUniversity:"",
+            degreeReceived:"",
+            graduationDate:"",
+            mailingAddress:'',
+            city:"",
+            state:"",
+            zip:""
+        }
+
+        ]})
+      //   handleListChange({
+      //     doesNotApplyUndergraduateEducation: true,
+      //     nameOfCollegeOrUniversity:"",
+      //     degreeReceived:"",
+      //     graduationDate:"",
+      //     mailingAddress:'',
+      //     city:"",
+      //     state:"",
+      //     zip:""
+      // }, "underGraduateEducation")
+          return ;
+        default:
+          return null;
+      }
+  }
 
 
 
@@ -188,7 +264,7 @@ const ProviderInfo = (props) => {
 
 
     const isStepOptional = (step) => {
-        return step === 1;
+        return step === 4;
     };
     
     const isStepSkipped = (step) => {
@@ -210,7 +286,11 @@ const ProviderInfo = (props) => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
     
-    const handleSkip = () => {
+    const handleSkip = (step) => {
+
+      console.log(step)
+      skipContent(step)
+
         if (!isStepOptional(activeStep)) {
           // You probably want to guard against something like this,
           // it should never occur unless someone's actively trying to break something.
@@ -255,11 +335,43 @@ const ProviderInfo = (props) => {
     }
 
 
+    const handleChangeLicense1=(value)=>{
+
+
+      setFormData(prevState => ({
+        ...prevState,
+         allOtherProLicenses: [value]
+        }))
+      
+    }
+
+
+
+    const handleListChange=(value, input)=>{
+      console.log(value, input)
+
+      setFormData(prevState => ({
+        ...prevState,
+         [input]: [...formData[input],value]
+        }))
+      
+    }
+
+
+
+
+
+
+
+
+
+
 
     console.log(formData)
     return (
         <div>
             <h1>Credential Application</h1>
+            <Grid container justifyContent='center'>
             <Stepper activeStep={activeStep}>
                 {steps.map(label => (
                   <Step key={label}>
@@ -267,6 +379,7 @@ const ProviderInfo = (props) => {
                   </Step>
                 ))}
               </Stepper>
+              </Grid>
             <form>
                 {_renderStepContent(activeStep)}
             </form>
@@ -282,7 +395,7 @@ const ProviderInfo = (props) => {
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
             {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+              <Button color="inherit" onClick={() => handleSkip(activeStep)} sx={{ mr: 1 }}>
                 Skip
               </Button>
             )}

@@ -13,19 +13,21 @@ import {
     Checkbox 
 } from '@mui/material'
 
-
-
-const UnderGraduteEducation = ({handleChange, values, handleChangeList}) => {
+const MedicalProfessionalEducation = ({handleChange, values, handleChangeList}) => {
 
     const [data, setData] = useState({
-        doesNotApplyUndergraduateEducation: false,
-        nameOfCollegeOrUniversity:"",
-        degreeReceived:"",
+
+        medicalProfessionSchool:"",
+        startDate:"",
         graduationDate:"",
+        degreeReceived: "",
         mailingAddress:'',
         city:"",
         state:"",
-        zip:""
+        zip:"",
+        phone:"",
+        fax:''
+
 
     })
 
@@ -42,35 +44,43 @@ const UnderGraduteEducation = ({handleChange, values, handleChangeList}) => {
         console.log(list)
         handleChangeList(list, 'underGraduateEducation')
         setData({
-            doesNotApplyUndergraduateEducation: false,
-            nameOfCollegeOrUniversity:"",
-            degreeReceived:"",
+            medicalProfessionSchool:"",
+            startDate:"",
             graduationDate:"",
+            degreeReceived: "",
             mailingAddress:'',
             city:"",
             state:"",
-            zip:""
+            zip:"",
+            phone:"",
+            fax:''
         })
     }
     
     let optionsList = [
         
         {
-            labelPlaceholder: "Name of college or university",
-            name: "nameOfCollegeOrUniversity",
+            labelPlaceholder: "Medical/Professional school",
+            name: "medicalProfessionSchool",
             size:12,
 
         },
         {
-            labelPlaceholder: "Degree received",
-            name: "degreeReceived",
-            size:9,
+            labelPlaceholder: "Start date",
+            name: "startDate",
+            size:4,
 
         },
         {
             labelPlaceholder: "Graduation date",
             name: "graduationDate",
-            size:3,
+            size:4,
+
+        },
+        {
+            labelPlaceholder: "Degree received",
+            name: "degreeReceived",
+            size:4,
 
         },
         {
@@ -97,13 +107,26 @@ const UnderGraduteEducation = ({handleChange, values, handleChangeList}) => {
             size:2,
 
         },
+        {
+            labelPlaceholder: "Phone",
+            name: "phone",
+            size:6,
+
+        },
+        {
+            labelPlaceholder: "Fax",
+            name: "fax",
+            size:6,
+
+        },
+
 
     ]
     return (
         <div>
             <Box sx={{ flexGrow: 1 }} >
                 <Grid container justifyContent='center'>
-                    <h2>UNDER-GRADUATE EDUCATION</h2>
+                    <h2>MEDICAL/PROFESSIONAL EDUCATION</h2>
                 </Grid>
 
                 <Grid container spacing={1} padding={5}>
@@ -125,27 +148,34 @@ const UnderGraduteEducation = ({handleChange, values, handleChangeList}) => {
 
                 </Grid>
                 <Grid container justifyContent='center'>
-                    <Button onClick={()=>addItem()}> Add University</Button>
+                    <Button onClick={()=>addItem()}> Add School</Button>
                 </Grid>
                 <Grid container spacing={1} padding={5} >
                 <TableContainer>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>College</TableCell>
-                                <TableCell>Degree</TableCell>
+                                <TableCell>School</TableCell>
+                                <TableCell>Start Date</TableCell>
                                 <TableCell>Graduation Date</TableCell>
-                                <TableCell>Mailing Address</TableCell>        
+                                <TableCell>Degree</TableCell>
+                                <TableCell>Mailing Address</TableCell>
+                                <TableCell>Phone</TableCell>
+                                <TableCell>Phone</TableCell>
+                                          
                             </TableRow>
                         </TableHead>
                             <TableBody>
                             {values.underGraduateEducation ? values.underGraduateEducation.map((pat,index) =>{
                                     return (
                             <TableRow key={index}>
-                                <TableCell>{pat.nameOfCollegeOrUniversity}</TableCell>
-                                <TableCell>{pat.degreeReceived}</TableCell>
+                                <TableCell>{pat.medicalProfessionSchool}</TableCell>
+                                <TableCell>{pat.startDate}</TableCell>
                                 <TableCell>{pat.graduationDate}</TableCell>
+                                <TableCell>{pat.degreeReceived}</TableCell>
                                 <TableCell>{pat.mailingAddress} {pat.city} {pat.state} {pat.zip}</TableCell>
+                                <TableCell>{pat.phone}</TableCell>
+                                <TableCell>{pat.fax}</TableCell>
 
                             </TableRow>
                                 )
@@ -159,4 +189,5 @@ const UnderGraduteEducation = ({handleChange, values, handleChangeList}) => {
         </div>
     )
 }
-export default UnderGraduteEducation
+
+export default MedicalProfessionalEducation
