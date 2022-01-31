@@ -10,6 +10,14 @@ import {
     Box, 
 } from '@mui/material'
 import { makeStyles } from "@material-ui/core/styles";
+import axios from 'axios';
+import downloadjs from 'downloadjs';
+import { saveAs } from 'file-saver';
+import { PDFDocument } from 'pdf-lib'
+
+
+
+
 
 const useStyles = makeStyles({
   content: {
@@ -19,6 +27,55 @@ const useStyles = makeStyles({
 
 const ReviewPage = ({values}) => {
     const classes = useStyles()
+
+    const download1 = async () =>{
+        axios.post('/api/providers/bluecrossofidaho',values, {responseType: 'arraybuffer'})
+        .then(async response =>{ 
+
+            console.log(response)
+
+            const data = Buffer.from(response.data)
+            console.log(data)
+            const pdfDoc = await PDFDocument.load(data)
+
+            const form = pdfDoc.getForm()
+
+
+            const pdfBytes = await pdfDoc.save()
+            downloadjs(pdfBytes,`${values.firstName}-${values.lastName}-BlueCross-of-idaho.pdf`, 'application/pdf')
+        })
+
+        // axios.post('/api/providers/regenceblueshieldofidaho',values, {responseType: 'arraybuffer'})
+        // .then(async response =>{ 
+
+        //     const data = Buffer.from(response.data)
+        //     console.log(data)
+        //     const pdfDoc = await PDFDocument.load(data)
+
+        //     const form = pdfDoc.getForm()
+
+
+        //     const pdfBytes = await pdfDoc.save()
+
+        //     downloadjs(pdfBytes,`${values.firstName}-${values.lastName}-regence-blueshield-idaho.pdf`, 'application/pdf')
+        // })
+
+        // axios.post('/api/providers/pacificsourceidaho',values, {responseType: 'arraybuffer'})
+        // .then(async response =>{ 
+
+        //     console.log(response)
+
+        //     const data = Buffer.from(response.data)
+        //     console.log(data)
+        //     const pdfDoc = await PDFDocument.load(data)
+
+        //     const form = pdfDoc.getForm()
+
+
+        //     const pdfBytes = await pdfDoc.save()
+        //     downloadjs(pdfBytes,`${values.firstName}-${values.lastName}-pacificsource-idaho.pdf`, 'application/pdf')
+        // })
+    }
 
 
     return (
@@ -31,7 +88,7 @@ const ReviewPage = ({values}) => {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
-                    classes={{ content: classes.content }}                 >
+                    classes={{ content: classes.content }} >
                     <Typography>Practioner Information</Typography>
                 </AccordionSummary>
                     <AccordionDetails>
@@ -63,6 +120,7 @@ const ReviewPage = ({values}) => {
                 </AccordionDetails>
                 </Accordion>
             </Grid>
+            <Button onClick={()=>download1()}>Download</Button>
         </Box>
       </div>
     )

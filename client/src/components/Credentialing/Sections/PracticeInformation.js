@@ -14,7 +14,7 @@ import {
 
 
 
-const PracticeInformation = ({handleFormData, values, handleChangeLocation}) => {
+const PracticeInformation = ({values,handleChangeList}) => {
 
 
     const [ data, setData ] = useState({
@@ -58,7 +58,7 @@ const PracticeInformation = ({handleFormData, values, handleChangeLocation}) => 
     const addItem = () =>{
     
         console.log(list)
-        handleChangeLocation(list)
+        handleChangeList(list, 'practiceLocations')
         setData({
             effectiveDateAtPrimaryPracticeLocation:"",
             nameOfPractice: '',

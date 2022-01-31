@@ -62,10 +62,11 @@ const ProviderInfo = (props) => {
       state:"",
       zipcode:"",
       dob:"",
+      birthPlace:"",
       ssn:"",
       citizenship:"",
       language:"",
-      specilaity:"",
+      speciality:"",
       gender:"",
       npi:"",
       upin:"",
@@ -175,7 +176,7 @@ const ProviderInfo = (props) => {
           case 0:
             return <PractitionerInfo handleFormData={handleInputData} values={formData}/>;
           case 1:
-            return <PracticeInformation handleChangeLocation={handleChangeLocation1} handleFormData={handleInputData} values={formData}/>;
+            return <PracticeInformation handleChangeList={handleListChange} handleFormData={handleInputData} values={formData}/>;
           case 2:
             return <ProLicence handleFormData={handleInputData} values={formData}/>;
           case 3:
@@ -324,15 +325,15 @@ const ProviderInfo = (props) => {
     }));
     }
 
-    const handleChangeLocation1=(value)=>{
+    // const handleChangeLocation1=(value)=>{
 
 
-      setFormData(prevState => ({
-        ...prevState,
-         practiceLocations: [value]
-        }))
+    //   setFormData(prevState => ({
+    //     ...prevState,
+    //      practiceLocations: [...formData[practiceLocations],value]
+    //     }))
       
-    }
+    // }
 
 
     const handleChangeLicense1=(value)=>{
@@ -356,14 +357,6 @@ const ProviderInfo = (props) => {
         }))
       
     }
-
-
-
-
-
-
-
-
 
 
 

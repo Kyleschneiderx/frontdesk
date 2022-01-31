@@ -18,14 +18,17 @@ const ProLicence = ({handleFormData, values}) => {
             size: 6,
             type: "select",
             options:[
-                {
-                    value: "PCP"
+                {   
+                    name: 'PCP',
+                    value: "PCP_2"
                 },
                 {
-                    value: "Urgent Care"
+                    name: 'Urgent Care',
+                    value: "Urgent Care_2"
                 },
                 {
-                    value: "Specialist"
+                    name: 'Specialist',
+                    value: "Specialist_2"
                 },
 
             ]
@@ -115,7 +118,7 @@ const ProLicence = ({handleFormData, values}) => {
                             <option value="" disabled hidden>{item.labelPlaceholder}</option>
                             {item.options.map((option, index)=>{
                                 return(
-                                <option key={index} value={option.value}>{option.value}</option>
+                                <option key={index} value={option.value}>{option.name}</option>
                                 )
                             })}
 
